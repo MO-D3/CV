@@ -1,0 +1,32 @@
+name: Create Release on tag
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create package
+        run: |
+          mkdir dist
+          # include only what you need for the site
+          cp index.html dist/
+          # add more assets if you create them later (css/js/images)
+          cd dist
+          zip -r ../site-${GITHUB_REF_NAME}.zip .
+          cd ..
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: site-${{ github.ref_name }}.zip
+          generate_release_notes: true

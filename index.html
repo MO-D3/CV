@@ -4,16 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Michał Olesiak — Timeline</title>
-    <meta name="description" content="Interactive, accessible career & life timeline of Michał Olesiak (WCAG 2.1 AA)." />
+    <meta name="description" content="Interactive, accessible career timeline of Michał Olesiak (WCAG 2.1 AA)." />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            colors: {
-              accent: { green: '#BBF7D0', red: '#FECACA', blue: '#BFDBFE' }
-            },
+            colors: { accent: { green: '#BBF7D0', red: '#FECACA', blue: '#BFDBFE' } },
             boxShadow: { soft: '0 10px 20px rgba(2, 6, 23, 0.06)' }
           }
         }
@@ -22,10 +20,11 @@
 
     <style>
       :focus-visible { outline: 3px solid #1e40af; outline-offset: 3px; }
-      @media (prefers-reduced-motion: reduce) { .reveal, .parallax { transition: none !important; transform: none !important; } html { scroll-behavior: auto; } }
+      @media (prefers-reduced-motion: reduce) { .reveal { transition: none !important; transform: none !important; } html { scroll-behavior: auto; } }
       .reveal { opacity: 0; transform: translateY(16px); transition: opacity 700ms ease, transform 700ms ease; }
       .reveal.is-visible { opacity: 1; transform: translateY(0); }
       #progressBar { height: 6px; background: #1e293b; width: 0%; }
+      .badge { display:inline-flex; align-items:center; padding:0.25rem 0.6rem; border-radius:9999px; border:1px solid rgb(226 232 240); background:white; font-size:0.875rem; }
     </style>
   </head>
   <body class="min-h-screen bg-white text-slate-900 antialiased">
@@ -49,7 +48,8 @@
         </a>
         <ul class="flex items-center gap-4 text-sm" role="list">
           <li><a class="hover:underline focus:underline" href="#timeline" data-i18n="nav_timeline">Oś czasu</a></li>
-          <li><a class="hover:underline focus:underline" href="#about" data-i18n="nav_about">O mnie</a></li>
+          <li><a class="hover:underline focus:underline" href="#tech" data-i18n="nav_tech">Tech stack</a></li>
+          <li><a class="hover:underline focus:underline" href="#education" data-i18n="nav_edu">Edukacja</a></li>
           <li><a class="hover:underline focus:underline" href="#contact" data-i18n="nav_contact">Kontakt</a></li>
           <li>
             <div class="inline-flex rounded-lg border border-slate-300" role="group" aria-label="Language switcher">
@@ -61,75 +61,112 @@
       </nav>
 
       <section class="mx-auto max-w-5xl px-4 pb-16 pt-6 sm:px-6 lg:px-8" aria-labelledby="hero-heading">
-        <h1 id="hero-heading" class="reveal text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl" data-i18n="hero_h1">Podróż przez moją historię zawodową i osobistą</h1>
-        <p class="reveal mt-4 max-w-2xl text-lg leading-relaxed text-slate-700" data-i18n="hero_p">Zapraszam Cię na lekką, interaktywną wędrówkę — od pierwszych doświadczeń technicznych, przez rozwój w QA Automation, aż po pasje i cele, które mnie napędzają.</p>
+        <h1 id="hero-heading" class="reveal text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl" data-i18n="hero_h1">Podróż przez moją historię zawodową</h1>
+        <p class="reveal mt-4 max-w-2xl text-lg leading-relaxed text-slate-700" data-i18n="hero_p">Od najnowszych projektów i odpowiedzialności po początki kariery — skupiam się na doświadczeniu zawodowym, jakości i automatyzacji.</p>
       </section>
     </header>
 
     <main id="main" class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <section id="about" aria-labelledby="about-heading" class="reveal mb-14 rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <h2 id="about-heading" class="text-2xl font-bold tracking-tight" data-i18n="about_h2">O mnie</h2>
-        <p class="mt-3 max-w-3xl text-slate-700" data-i18n="about_p">Jestem inżynierem QA Automation ze znajomością Playwrighta, TypeScriptu i testów API. Lubię usprawniać procesy, dzielić się wiedzą i dbać o wysoką jakość dostarczanych rozwiązań. Poza pracą — góry, rozwój i technologia.</p>
-      </section>
-
+      <!-- TIMELINE (newest → oldest) -->
       <section id="timeline" aria-labelledby="timeline-heading" class="mb-24">
         <div class="reveal mb-8 flex items-center justify-between">
-          <h2 id="timeline-heading" class="text-3xl font-bold tracking-tight" data-i18n="timeline_h2">Oś czasu</h2>
+          <h2 id="timeline-heading" class="text-3xl font-bold tracking-tight" data-i18n="timeline_h2">Oś czasu (najnowsze → najstarsze)</h2>
           <div role="status" aria-live="polite" class="text-sm text-slate-600"><span data-i18n="timeline_pos">Pozycja na stronie:</span> <span id="spyLabel">Start</span></div>
         </div>
 
         <ol class="relative border-l-4 border-slate-900 pl-6" role="list" aria-label="Timeline">
-          <li id="item-2018" class="reveal mb-12">
-            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
-            <time class="inline-block rounded-full bg-accent-blue px-3 py-1 text-sm font-semibold" datetime="2018">2018–2022</time>
-            <h3 class="mt-3 text-xl font-bold" data-i18n="t_2018_h3">Studia inżynierskie i pierwsze doświadczenia techniczne</h3>
-            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_2018_p">Rozpoczęcie studiów na AGH oraz rozwój zainteresowań elektroniką i pomiarami. W 2021 dołączam do AQForm jako Technik Laboratorium / Elektronik — badania fotometryczne, EMC i bezpieczeństwo fotobiologiczne zgodnie z normami UE.</p>
-          </li>
-
-          <li id="item-2021" class="reveal mb-12">
-            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
-            <time class="inline-block rounded-full bg-accent-green px-3 py-1 text-sm font-semibold" datetime="2021">04.2021 – 05.2022</time>
-            <h3 class="mt-3 text-xl font-bold" data-i18n="t_2021_h3">AQForm — Technik Laboratorium i Elektronik</h3>
-            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_2021_p">Pomiary i testy zgodności (fotometria, EMC, bezpieczeństwo fotobiologiczne). Dbałość o jakość i dokumentację.</p>
-          </li>
-
-          <li id="item-2022-fdm" class="reveal mb-12">
-            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
-            <time class="inline-block rounded-full bg-accent-red px-3 py-1 text-sm font-semibold" datetime="2022-05">05.2022 – 08.2022</time>
-            <h3 class="mt-3 text-xl font-bold" data-i18n="t_2022fdm_h3">FDM Group — Java Developer Trainee</h3>
-            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_2022fdm_p">Intensywne szkolenie 8h dziennie z podstaw inżynierii oprogramowania, projekt grupowy: analiza wymagań, implementacja, dokumentacja i prezentacja.</p>
-          </li>
-
-          <li id="item-2022-hsbc" class="reveal mb-12">
-            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
-            <time class="inline-block rounded-full bg-accent-blue px-3 py-1 text-sm font-semibold" datetime="2022-08" data-i18n="t_hsbc_time">od 08.2022</time>
-            <h3 class="mt-3 text-xl font-bold" data-i18n="t_hsbc_h3">HSBC — QA Automation Engineer</h3>
-            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_hsbc_p">Prowadzenie procesów QA, strategie testów i autorskie frameworki. Automatyzacja testów integracyjnych i wizualnych (Playwright), testy API i wydajności, wsparcie wdrożeń produkcyjnych.</p>
-            <ul class="mt-3 list-disc space-y-2 pl-6 text-slate-700">
-              <li data-i18n="t_hsbc_li1"><strong>Browser Design Library:</strong> pokrycie testami integracyjnymi i wizualnymi, wzrost automatyzacji.</li>
-              <li data-i18n="t_hsbc_li2"><strong>M&amp;S Cards &amp; M&amp;S Loans:</strong> 100% automatyzacji dla kart oraz ~80% dla pożyczek; testy API (Postman) i wydajności (Gatling/JMeter). <a class="underline decoration-2 underline-offset-2 focus:underline hover:underline" href="https://www.msbank.com" target="_blank" rel="noopener noreferrer" data-i18n="t_hsbc_ms">Odwiedź M&amp;S Bank</a>.</li>
-              <li data-i18n="t_hsbc_li3"><strong>HSBC Pay:</strong> testy ścieżek krytycznych, wsparcie UAT, doradztwo dot. procesów kredytowych i architektury.</li>
-              <li data-i18n="t_hsbc_li4"><strong>WCAO:</strong> automatyzacja z Cucumberem, ponowne użycie kroków, manualne testy API.</li>
-              <li data-i18n="t_hsbc_li5"><strong>Inicjatywy:</strong> zarządzanie urządzeniami testowymi (Kraków), kurs podstaw Java + mentoring 14 testerów manualnych.</li>
-            </ul>
-          </li>
-
-          <li id="item-2025-master" class="reveal mb-12">
-            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
-            <time class="inline-block rounded-full bg-accent-green px-3 py-1 text-sm font-semibold" datetime="2025">2023–2025</time>
-            <h3 class="mt-3 text-xl font-bold" data-i18n="t_master_h3">AGH — Magister (ZiIP) &amp; rozwój pasji</h3>
-            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_master_p">Studia magisterskie na kierunku Zarządzanie i Inżynieria Produkcji (2023–2025). Równolegle rozwijam pasję do gór (Alpy, Pireneje, Himalaje ~6500 m) oraz tworzę treści (LinkedIn/YouTube).</p>
-          </li>
-
-          <li id="item-today" class="reveal mb-2">
+          <!-- Today -->
+          <li id="item-today" class="reveal mb-12">
             <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
             <time class="inline-block rounded-full bg-accent-red px-3 py-1 text-sm font-semibold" datetime="2025-08" data-i18n="t_today_time">Dziś</time>
-            <h3 class="mt-3 text-xl font-bold" data-i18n="t_today_h3">Działam, uczę się, automatyzuję</h3>
-            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_today_p">Kontynuuję rozwój w automatyzacji testów (Playwright, accessibility, performance), buduję dobre praktyki w zespole i dbam o jakość — z lekkością i uśmiechem 😊</p>
+            <h3 class="mt-3 text-xl font-bold" data-i18n="t_today_h3">QA Automation — praktyki i standardy</h3>
+            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_today_p">Skaluję automatyzację (Playwright, accessibility, performance), buduję dobre praktyki zespołowe i wspieram wdrożenia produkcyjne.</p>
+            <div class="mt-3 flex flex-wrap gap-2" aria-label="Highlights">
+              <span class="badge">Playwright</span><span class="badge">TypeScript</span><span class="badge">a11y</span><span class="badge">CI/CD</span>
+            </div>
+          </li>
+
+          <!-- HSBC -->
+          <li id="item-2022-hsbc" class="reveal mb-12">
+            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
+            <time class="inline-block rounded-full bg-accent-blue px-3 py-1 text-sm font-semibold" datetime="2022-08" data-i18n="t_hsbc_time">08.2022 – obecnie</time>
+            <h3 class="mt-3 text-xl font-bold" data-i18n="t_hsbc_h3">HSBC — QA Automation Engineer</h3>
+            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_hsbc_p">Prowadzenie QA, strategie testów i frameworki. Integracyjne i wizualne testy (Playwright), API i wydajność, wsparcie release.</p>
+            <ul class="mt-3 list-disc space-y-2 pl-6 text-slate-700">
+              <li data-i18n="t_hsbc_li1"><strong>Browser Design Library:</strong> integracja + testy wizualne, wzrost pokrycia.</li>
+              <li data-i18n="t_hsbc_li2"><strong>M&amp;S Cards &amp; Loans:</strong> 100% automatyzacji dla kart, ~80% dla pożyczek; API (Postman), performance (Gatling/JMeter). <a class="underline decoration-2 underline-offset-2 focus:underline hover:underline" href="https://www.msbank.com" target="_blank" rel="noopener noreferrer" data-i18n="t_hsbc_ms">Odwiedź M&amp;S Bank</a>.</li>
+              <li data-i18n="t_hsbc_li3"><strong>HSBC Pay:</strong> ścieżki krytyczne, UAT, doradztwo dot. kredytów i architektury.</li>
+              <li data-i18n="t_hsbc_li4"><strong>WCAO:</strong> Cucumber, reużywalne kroki, manualne testy API.</li>
+              <li data-i18n="t_hsbc_li5"><strong>Inicjatywy:</strong> zarządzanie urządzeniami testowymi, kurs Java + mentoring 14 testerów.</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2" aria-label="Skills">
+              <span class="badge">Java</span>
+              <span class="badge">Postman</span>
+              <span class="badge">Cucumber</span>
+              <span class="badge">RestAssured</span>
+              <span class="badge">Critical Thinking</span>
+            </div>
+          </li>
+
+          <!-- FDM -->
+          <li id="item-2022-fdm" class="reveal mb-12">
+            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
+            <time class="inline-block rounded-full bg-accent-green px-3 py-1 text-sm font-semibold" datetime="2022-05">05.2022 – 08.2022</time>
+            <h3 class="mt-3 text-xl font-bold" data-i18n="t_2022fdm_h3">FDM Group — Java Developer Trainee</h3>
+            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_2022fdm_p">8h/dzień szkoleń z inżynierii oprogramowania, projekt zespołowy: wymagania → implementacja → dokumentacja → prezentacja.</p>
+            <div class="mt-3 flex flex-wrap gap-2" aria-label="Skills">
+              <span class="badge">Java</span>
+              <span class="badge">Spring</span>
+              <span class="badge">Linux</span>
+              <span class="badge">Ubuntu</span>
+            </div>
+          </li>
+
+          <!-- AQForm -->
+          <li id="item-2021" class="reveal mb-12">
+            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
+            <time class="inline-block rounded-full bg-accent-red px-3 py-1 text-sm font-semibold" datetime="2021">04.2021 – 05.2022</time>
+            <h3 class="mt-3 text-xl font-bold" data-i18n="t_2021_h3">AQForm — Technik Laboratorium i Elektronik</h3>
+            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_2021_p">Pomiary i testy zgodności (fotometria, EMC, bezpieczeństwo fotobiologiczne). Dbałość o jakość i dokumentację.</p>
           </li>
         </ol>
       </section>
 
+      <!-- TECH STACK -->
+      <section id="tech" aria-labelledby="tech-heading" class="reveal mb-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+        <h2 id="tech-heading" class="text-2xl font-bold tracking-tight" data-i18n="tech_h2">Tech stack</h2>
+        <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          <div class="badge">Playwright</div>
+          <div class="badge">TypeScript</div>
+          <div class="badge">Java</div>
+          <div class="badge">Node.js</div>
+          <div class="badge">Cucumber</div>
+          <div class="badge">Postman</div>
+          <div class="badge">REST</div>
+          <div class="badge">JMeter / Gatling</div>
+          <div class="badge">Axe-core (a11y)</div>
+          <div class="badge">Lighthouse</div>
+          <div class="badge">Jenkins / GitHub Actions</div>
+          <div class="badge">Docker (basic)</div>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education" aria-labelledby="edu-heading" class="reveal mb-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+        <h2 id="edu-heading" class="text-2xl font-bold tracking-tight" data-i18n="edu_h2">Edukacja</h2>
+        <ul class="mt-4 space-y-4" role="list">
+          <li class="rounded-xl border border-slate-200 p-4">
+            <div class="flex items-center gap-2"><time class="text-sm font-semibold rounded-full bg-accent-green px-2 py-0.5">2023–2025</time><span class="text-sm text-slate-600" data-i18n="edu_msc_school">AGH — Zarządzanie i Inżynieria Produkcji</span></div>
+            <p class="mt-1 text-slate-700" data-i18n="edu_msc_desc">Magister (ZiIP). Tematy: zwinne zarządzanie projektami IT, dobre praktyki.</p>
+          </li>
+          <li class="rounded-xl border border-slate-200 p-4">
+            <div class="flex items-center gap-2"><time class="text-sm font-semibold rounded-full bg-accent-blue px-2 py-0.5">2018–2022</time><span class="text-sm text-slate-600" data-i18n="edu_beng_school">AGH — studia inżynierskie</span></div>
+            <p class="mt-1 text-slate-700" data-i18n="edu_beng_desc">Inżynier, pierwsze doświadczenia techniczne i praca laboratoryjna.</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- CONTACT -->
       <section id="contact" aria-labelledby="contact-heading" class="reveal mb-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
         <h2 id="contact-heading" class="text-2xl font-bold tracking-tight" data-i18n="contact_h2">Kontakt</h2>
         <p class="mt-2 text-slate-700"><span data-i18n="contact_p">Masz pytania lub chcesz porozmawiać o jakości i automatyzacji? Napisz do mnie:</span> <a class="underline hover:underline focus:underline" href="mailto:micholesiak@gmail.com">micholesiak@gmail.com</a></p>
@@ -155,33 +192,27 @@
       const i18n = {
         pl: {
           skip: 'Przejdź do głównej treści',
-          nav_timeline: 'Oś czasu', nav_about: 'O mnie', nav_contact: 'Kontakt',
-          hero_h1: 'Podróż przez moją historię zawodową i osobistą',
-          hero_p: 'Zapraszam Cię na lekką, interaktywną wędrówkę — od pierwszych doświadczeń technicznych, przez rozwój w QA Automation, aż po pasje i cele, które mnie napędzają.',
-          about_h2: 'O mnie',
-          about_p: 'Jestem inżynierem QA Automation ze znajomością Playwrighta, TypeScriptu i testów API. Lubię usprawniać procesy, dzielić się wiedzą i dbać o wysoką jakość dostarczanych rozwiązań. Poza pracą — góry, rozwój i technologia.',
-          timeline_h2: 'Oś czasu',
+          nav_timeline: 'Oś czasu', nav_tech: 'Tech stack', nav_edu: 'Edukacja', nav_contact: 'Kontakt',
+          hero_h1: 'Podróż przez moją historię zawodową',
+          hero_p: 'Od najnowszych projektów i odpowiedzialności po początki kariery — skupiam się na doświadczeniu zawodowym, jakości i automatyzacji.',
+          timeline_h2: 'Oś czasu (najnowsze → najstarsze)',
           timeline_pos: 'Pozycja na stronie:',
-          t_2018_h3: 'Studia inżynierskie i pierwsze doświadczenia techniczne',
-          t_2018_p: 'Rozpoczęcie studiów na AGH oraz rozwój zainteresowań elektroniką i pomiarami. W 2021 dołączam do AQForm jako Technik Laboratorium / Elektronik — badania fotometryczne, EMC i bezpieczeństwo fotobiologiczne zgodnie z normami UE.',
-          t_2021_h3: 'AQForm — Technik Laboratorium i Elektronik',
-          t_2021_p: 'Pomiary i testy zgodności (fotometria, EMC, bezpieczeństwo fotobiologiczne). Dbałość o jakość i dokumentację.',
-          t_2022fdm_h3: 'FDM Group — Java Developer Trainee',
-          t_2022fdm_p: 'Intensywne szkolenie 8h dziennie z podstaw inżynierii oprogramowania, projekt grupowy: analiza wymagań, implementacja, dokumentacja i prezentacja.',
-          t_hsbc_time: 'od 08.2022',
-          t_hsbc_h3: 'HSBC — QA Automation Engineer',
-          t_hsbc_p: 'Prowadzenie procesów QA, strategie testów i autorskie frameworki. Automatyzacja testów integracyjnych i wizualnych (Playwright), testy API i wydajności, wsparcie wdrożeń produkcyjnych.',
-          t_hsbc_li1: 'Browser Design Library: pokrycie testami integracyjnymi i wizualnymi, wzrost automatyzacji.',
-          t_hsbc_li2: 'M&S Cards & M&S Loans: 100% automatyzacji dla kart oraz ~80% dla pożyczek; testy API (Postman) i wydajności (Gatling/JMeter). ',
+          t_today_time: 'Dziś', t_today_h3: 'QA Automation — praktyki i standardy', t_today_p: 'Skaluję automatyzację (Playwright, accessibility, performance), buduję dobre praktyki zespołowe i wspieram wdrożenia produkcyjne.',
+          t_hsbc_time: '08.2022 – obecnie', t_hsbc_h3: 'HSBC — QA Automation Engineer', t_hsbc_p: 'Prowadzenie QA, strategie testów i frameworki. Integracyjne i wizualne testy (Playwright), API i wydajność, wsparcie release.',
+          t_hsbc_li1: 'Browser Design Library: integracja + testy wizualne, wzrost pokrycia.',
+          t_hsbc_li2: 'M&S Cards & Loans: 100% automatyzacji dla kart, ~80% dla pożyczek; API (Postman), performance (Gatling/JMeter). ',
           t_hsbc_ms: 'Odwiedź M&S Bank',
-          t_hsbc_li3: 'HSBC Pay: testy ścieżek krytycznych, wsparcie UAT, doradztwo dot. procesów kredytowych i architektury.',
-          t_hsbc_li4: 'WCAO: automatyzacja z Cucumberem, ponowne użycie kroków, manualne testy API.',
-          t_hsbc_li5: 'Inicjatywy: zarządzanie urządzeniami testowymi (Kraków), kurs podstaw Java + mentoring 14 testerów manualnych.',
-          t_master_h3: 'AGH — Magister (ZiIP) & rozwój pasji',
-          t_master_p: 'Studia magisterskie na kierunku Zarządzanie i Inżynieria Produkcji (2023–2025). Równolegle rozwijam pasję do gór (Alpy, Pireneje, Himalaje ~6500 m) oraz tworzę treści (LinkedIn/YouTube).',
-          t_today_time: 'Dziś',
-          t_today_h3: 'Działam, uczę się, automatyzuję',
-          t_today_p: 'Kontynuuję rozwój w automatyzacji testów (Playwright, accessibility, performance), buduję dobre praktyki w zespole i dbam o jakość — z lekkością i uśmiechem 😊',
+          t_hsbc_li3: 'HSBC Pay: ścieżki krytyczne, UAT, doradztwo dot. kredytów i architektury.',
+          t_hsbc_li4: 'WCAO: Cucumber, reużywalne kroki, manualne testy API.',
+          t_hsbc_li5: 'Inicjatywy: zarządzanie urządzeniami testowymi, kurs Java + mentoring 14 testerów.',
+          t_2022fdm_h3: 'FDM Group — Java Developer Trainee', t_2022fdm_p: '8h/dzień szkoleń z inżynierii oprogramowania, projekt zespołowy: wymagania → implementacja → dokumentacja → prezentacja.',
+          t_2021_h3: 'AQForm — Technik Laboratorium i Elektronik', t_2021_p: 'Pomiary i testy zgodności (fotometria, EMC, bezpieczeństwo fotobiologiczne). Dbałość o jakość i dokumentację.',
+          tech_h2: 'Tech stack',
+          edu_h2: 'Edukacja',
+          edu_msc_school: 'AGH — Zarządzanie i Inżynieria Produkcji',
+          edu_msc_desc: 'Magister (ZiIP). Tematy: zwinne zarządzanie projektami IT, dobre praktyki.',
+          edu_beng_school: 'AGH — studia inżynierskie',
+          edu_beng_desc: 'Inżynier, pierwsze doświadczenia techniczne i praca laboratoryjna.',
           contact_h2: 'Kontakt',
           contact_p: 'Masz pytania lub chcesz porozmawiać o jakości i automatyzacji? Napisz do mnie:',
           rights: 'Wszelkie prawa zastrzeżone.',
@@ -189,39 +220,36 @@
         },
         en: {
           skip: 'Skip to main content',
-          nav_timeline: 'Timeline', nav_about: 'About', nav_contact: 'Contact',
-          hero_h1: 'A journey through my professional and personal story',
-          hero_p: 'Join a light, interactive trip — from early tech experience, through QA Automation growth, to the passions and goals that drive me.',
-          about_h2: 'About',
-          about_p: 'I am a QA Automation Engineer working with Playwright, TypeScript and API testing. I enjoy improving processes, sharing knowledge, and ensuring high product quality. Beyond work — mountains, growth and technology.',
-          timeline_h2: 'Timeline',
+          nav_timeline: 'Timeline', nav_tech: 'Tech stack', nav_edu: 'Education', nav_contact: 'Contact',
+          hero_h1: 'A journey through my professional story',
+          hero_p: 'From the latest responsibilities back to the beginning — focused on experience, quality and automation.',
+          timeline_h2: 'Timeline (newest → oldest)',
           timeline_pos: 'Reading position:',
-          t_2018_h3: 'B.Eng. studies and first hands‑on tech experience',
-          t_2018_p: 'Started studies at AGH and grew interests in electronics and measurements. In 2021 I joined AQForm as Lab Technician / Electronics — photometric, EMC and photobiological safety testing under EU standards.',
-          t_2021_h3: 'AQForm — Lab Technician & Electronics',
-          t_2021_p: 'Compliance and measurement work (photometry, EMC, photobiological safety). Quality and documentation focus.',
-          t_2022fdm_h3: 'FDM Group — Java Developer Trainee',
-          t_2022fdm_p: 'Intensive 8h/day software engineering training, team project: requirements, implementation, documentation and presentation.',
-          t_hsbc_time: 'since 08.2022',
-          t_hsbc_h3: 'HSBC — QA Automation Engineer',
-          t_hsbc_p: 'Leading QA processes, test strategies and custom frameworks. Playwright integration & visual tests, API and performance testing, production release support.',
-          t_hsbc_li1: 'Browser Design Library: integration & visual coverage, automation growth.',
-          t_hsbc_li2: 'M&S Cards & M&S Loans: 100% automation for cards and ~80% for loans; API (Postman) and performance tests (Gatling/JMeter). ',
+          t_today_time: 'Today', t_today_h3: 'QA Automation — practices & standards', t_today_p: 'Scaling automation (Playwright, accessibility, performance), shaping team practices and supporting production releases.',
+          t_hsbc_time: '08.2022 – present', t_hsbc_h3: 'HSBC — QA Automation Engineer', t_hsbc_p: 'Leading QA, test strategies and frameworks. Integration & visual tests (Playwright), API and performance, release support.',
+          t_hsbc_li1: 'Browser Design Library: integration + visual testing, coverage growth.',
+          t_hsbc_li2: 'M&S Cards & Loans: 100% automation for cards, ~80% for loans; API (Postman), performance tests (Gatling/JMeter). ',
           t_hsbc_ms: 'Visit M&S Bank',
-          t_hsbc_li3: 'HSBC Pay: critical path tests, UAT support, advisory on credit processes & architecture.',
-          t_hsbc_li4: 'WCAO: Cucumber-based automation, reusable steps, manual API tests.',
-          t_hsbc_li5: 'Initiatives: test devices management (Kraków), Java basics course + mentoring 14 manual testers.',
-          t_master_h3: 'AGH — M.Sc. (ZiIP) & passions',
-          t_master_p: 'Master studies in Management & Production Engineering (2023–2025). In parallel I pursue mountain climbing (Alps, Pyrenees, Himalayas ~6500 m) and create content (LinkedIn/YouTube).',
-          t_today_time: 'Today',
-          t_today_h3: 'Building, learning, automating',
-          t_today_p: 'Continuing to grow in test automation (Playwright, accessibility, performance), shaping good team practices and focusing on quality — with lightness and a smile 😊',
+          t_hsbc_li3: 'HSBC Pay: critical paths, UAT, advisory on credit and architecture.',
+          t_hsbc_li4: 'WCAO: Cucumber, reusable steps, manual API tests.',
+          t_hsbc_li5: 'Initiatives: test devices management, Java basics course + mentoring 14 manual testers.',
+          t_2022fdm_h3: 'FDM Group — Java Developer Trainee', t_2022fdm_p: 'Intensive 8h/day training, team project: requirements → implementation → documentation → presentation.',
+          t_2021_h3: 'AQForm — Lab Technician & Electronics', t_2021_p: 'Compliance and measurement (photometry, EMC, photobiological safety). Quality and documentation focus.',
+          tech_h2: 'Tech stack',
+          edu_h2: 'Education',
+          edu_msc_school: 'AGH — Management & Production Engineering',
+          edu_msc_desc: 'M.Sc. (ZiIP). Topics: agile IT project management, good practices.',
+          edu_beng_school: 'AGH — B.Eng. studies',
+          edu_beng_desc: 'Engineer degree, first hands-on technical and lab experience.',
           contact_h2: 'Contact',
           contact_p: 'Questions or want to talk quality & automation? Email me at',
           rights: 'All rights reserved.',
           ln_label: "Open Michał's LinkedIn profile in a new tab"
         }
       };
+
+      const btnPL = document.getElementById('btnPL');
+      const btnEN = document.getElementById('btnEN');
 
       const setLang = (lang) => {
         document.documentElement.lang = lang;
@@ -232,8 +260,6 @@
         btnEN.setAttribute('aria-pressed', String(lang==='en'));
       };
 
-      const btnPL = document.getElementById('btnPL');
-      const btnEN = document.getElementById('btnEN');
       btnPL.addEventListener('click', () => setLang('pl'));
       btnEN.addEventListener('click', () => setLang('en'));
 
@@ -247,11 +273,9 @@
 
       const progressBar = document.getElementById('progressBar');
       const onScroll = () => {
-        const t = window.scrollY, d = document.body.scrollHeight - window.innerHeight;
-        progressBar.style.width = (d>0 ? (t/d)*100 : 0) + '%';
+        const t = window.scrollY, d = document.body.scrollHeight - window.innerHeight; progressBar.style.width = (d>0 ? (t/d)*100 : 0) + '%';
       };
-      document.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      document.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
       const spyLabel = document.getElementById('spyLabel');
       const items = [...document.querySelectorAll('#timeline [id^="item-"]')];

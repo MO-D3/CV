@@ -507,6 +507,10 @@
         margin-top: 24px;
       }
 
+      #portals {
+        margin-top: 24px;
+      }
+
       .main-stack,
       .side-stack {
         display: grid;
@@ -721,6 +725,26 @@
 
       .story-card .list {
         margin-top: 16px;
+      }
+
+      .side-stack .story-card h3 {
+        position: relative;
+        padding-left: 14px;
+        color: rgba(232, 255, 249, 0.98);
+        text-shadow: 0 0 18px rgba(100, 255, 215, 0.08);
+      }
+
+      .side-stack .story-card h3::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 2px;
+        height: 18px;
+        border-radius: 999px;
+        transform: translateY(-50%);
+        background: linear-gradient(180deg, rgba(0, 238, 186, 0.95), rgba(100, 255, 215, 0.3));
+        box-shadow: 0 0 10px rgba(0, 238, 186, 0.2);
       }
 
       .agent-card::after,
@@ -1078,6 +1102,16 @@
           color: #333333;
         }
 
+        .side-stack .story-card h3 {
+          padding-left: 0;
+          color: #111111;
+          text-shadow: none;
+        }
+
+        .side-stack .story-card h3::before {
+          display: none;
+        }
+
       }
     </style>
   </head>
@@ -1188,7 +1222,6 @@
                   <span class="stack-pill">Playwright</span>
                   <span class="stack-pill">Java</span>
                   <span class="stack-pill">Spring Boot</span>
-                  <span class="stack-pill">React</span>
                   <span class="stack-pill">Cucumber</span>
                   <span class="stack-pill">RestAssured</span>
                   <span class="stack-pill">GitHub Actions</span>
@@ -1207,7 +1240,6 @@
                   <span class="stack-pill duplicate">Playwright</span>
                   <span class="stack-pill duplicate">Java</span>
                   <span class="stack-pill duplicate">Spring Boot</span>
-                  <span class="stack-pill duplicate">React</span>
                   <span class="stack-pill duplicate">Cucumber</span>
                   <span class="stack-pill duplicate">RestAssured</span>
                   <span class="stack-pill duplicate">GitHub Actions</span>
@@ -1326,71 +1358,8 @@
               </article>
             </div>
 
-            <article class="story-card" style="margin-top: 18px;">
-              <h3>Parallel track: AI-supported audience building</h3>
-              <p>
-                I use AI in my LinkedIn workflow to build technical visibility and grow the audience,
-                which helped bring the profile to around 2.5k followers.
-              </p>
-            </article>
           </section>
 
-          <section class="module reveal" id="portals">
-            <div class="module-header">
-              <div>
-                <div class="eyebrow">Portals</div>
-                <h2 class="module-title">Open the proof points that matter</h2>
-                <p class="module-subtitle">
-                  Paily and LinkedIn are part of the story, not loose links.
-                </p>
-              </div>
-            </div>
-
-            <div class="portal-grid">
-              <article class="portal-card">
-                <div>
-                  <div class="portal-icon" aria-hidden="true">P</div>
-                  <h3 class="portal-title">Paily</h3>
-                  <p>
-                    My end-to-end full-stack product laboratory, built in a strongly AI-supported workflow
-                    for coding, refinement, planning, market-fit exploration, and lead discovery.
-                  </p>
-                  <div class="portal-tags" style="margin-top: 16px;">
-                    <span class="tag">Product thinking</span>
-                    <span class="tag">Full-stack build</span>
-                    <span class="tag">Engineering depth</span>
-                    <span class="tag">Real-world validation</span>
-                  </div>
-                  <span class="cta-meta">Founder / Builder</span>
-                </div>
-                <a class="portal-link clickable" href="https://paily.pl" target="_blank" rel="noopener noreferrer" data-cursor="burst">
-                  <span>Open the Paily journey</span>
-                  <span aria-hidden="true">↗</span>
-                </a>
-              </article>
-
-              <article class="portal-card">
-                <div>
-                  <div class="portal-icon" aria-hidden="true">in</div>
-                  <h3 class="portal-title">LinkedIn</h3>
-                  <p>
-                    I use AI to support my LinkedIn workflow and grow technical visibility around my work,
-                    with the audience now around 2.5k followers.
-                  </p>
-                  <div class="portal-tags" style="margin-top: 16px;">
-                    <span class="tag">Career timeline</span>
-                    <span class="tag">AI-supported content workflow</span>
-                    <span class="tag">2.5k+ followers</span>
-                  </div>
-                  <span class="cta-meta">Live profile</span>
-                </div>
-                <a class="portal-link clickable" href="https://www.linkedin.com/in/michal-olesiak/" target="_blank" rel="noopener noreferrer" data-cursor="burst">
-                  <span>Open LinkedIn profile</span>
-                  <span aria-hidden="true">↗</span>
-                </a>
-              </article>
-            </div>
-          </section>
         </div>
 
         <aside class="side-stack">
@@ -1425,21 +1394,85 @@
               <h3>Languages</h3>
               <p>Polish native, English B2.</p>
             </article>
-          </section>
-
-          <section class="module reveal">
-            <div class="eyebrow">Contact</div>
-            <h2 class="module-title">Start the conversation</h2>
-            <article class="contact-card">
-              <h3>Email</h3>
-              <p>Best direct path for application follow-up or technical conversation. Clicking opens a new message in the default mail app.</p>
-              <a class="mini-link clickable" href="mailto:micholesiak@gmail.com?subject=Application%20follow-up" data-cursor="burst" aria-label="Send an email to micholesiak@gmail.com">
-                <span>Email micholesiak@gmail.com</span>
-              </a>
+            <article class="story-card" style="margin-top: 14px;">
+              <h3>Additional initiatives</h3>
+              <ul class="list">
+                <li>
+                  Designed and led an internal Java training program for 14 manual testers across most
+                  of 2024, preparing the sessions independently and running the upskilling track
+                  end-to-end.
+                </li>
+                <li>
+                  Delivered global HSBC knowledge-sharing sessions on AI-supported automation, focused on
+                  practical ways to use AI in quality and automation work.
+                </li>
+                <li>
+                  I use AI in my LinkedIn workflow to build technical visibility and grow the audience,
+                  which helped bring the profile to around 2.5k followers.
+                </li>
+              </ul>
             </article>
           </section>
+
         </aside>
       </div>
+
+      <section class="module reveal" id="portals">
+        <div class="module-header">
+          <div>
+            <div class="eyebrow">Portals</div>
+            <h2 class="module-title">Open the proof points that matter</h2>
+            <p class="module-subtitle">
+              Paily and LinkedIn are part of the story, not loose links.
+            </p>
+          </div>
+        </div>
+
+        <div class="portal-grid">
+          <article class="portal-card">
+            <div>
+              <div class="portal-icon" aria-hidden="true">P</div>
+              <h3 class="portal-title">Paily</h3>
+              <p>
+                My end-to-end full-stack product laboratory, built in a strongly AI-supported workflow
+                for coding, refinement, planning, market-fit exploration, and lead discovery.
+              </p>
+              <div class="portal-tags" style="margin-top: 16px;">
+                <span class="tag">Product thinking</span>
+                <span class="tag">Full-stack build</span>
+                <span class="tag">Engineering depth</span>
+                <span class="tag">Real-world validation</span>
+              </div>
+              <span class="cta-meta">Founder / Builder</span>
+            </div>
+            <a class="portal-link clickable" href="https://paily.pl" target="_blank" rel="noopener noreferrer" data-cursor="burst">
+              <span>Open the Paily journey</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+
+          <article class="portal-card">
+            <div>
+              <div class="portal-icon" aria-hidden="true">in</div>
+              <h3 class="portal-title">LinkedIn</h3>
+              <p>
+                I use AI to support my LinkedIn workflow and grow technical visibility around my work,
+                with the audience now around 2.5k followers.
+              </p>
+              <div class="portal-tags" style="margin-top: 16px;">
+                <span class="tag">Career timeline</span>
+                <span class="tag">AI-supported content workflow</span>
+                <span class="tag">2.5k+ followers</span>
+              </div>
+              <span class="cta-meta">Live profile</span>
+            </div>
+            <a class="portal-link clickable" href="https://www.linkedin.com/in/michal-olesiak/" target="_blank" rel="noopener noreferrer" data-cursor="burst">
+              <span>Open LinkedIn profile</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+        </div>
+      </section>
     </main>
 
     <script>

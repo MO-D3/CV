@@ -349,6 +349,53 @@
         color: var(--mist);
       }
 
+      .brand-cluster {
+        display: grid;
+        gap: 10px;
+        align-content: start;
+      }
+
+      .brand-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        align-self: start;
+        border: 0;
+        border-radius: 999px;
+        padding: 9px 14px;
+        background: linear-gradient(135deg, rgba(0, 238, 186, 0.22), rgba(100, 255, 215, 0.14));
+        box-shadow:
+          inset 0 0 0 1px rgba(100, 255, 215, 0.2),
+          0 12px 24px rgba(0, 0, 0, 0.14);
+        color: var(--aqua-strong);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .brand-action:hover,
+      .brand-action:focus-visible {
+        transform: translateY(-1px);
+      }
+
+      .brand-action-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.14);
+        font-size: 0.78rem;
+      }
+
+      .brand-audio {
+        display: none;
+      }
+
       .portal-link:hover,
       .portal-link:focus-visible,
       .mini-link:hover,
@@ -1030,6 +1077,7 @@
         .footer-note {
           color: #333333;
         }
+
       }
     </style>
   </head>
@@ -1038,13 +1086,28 @@
 
     <main class="shell">
       <nav class="topbar reveal" aria-label="Primary">
-        <a class="brand clickable" href="#mission" data-cursor="burst" aria-label="Go to mission section">
-          <span class="brand-mark">MO</span>
-          <span class="brand-copy">
-            <strong>Michał Olesiak</strong>
-            <span>AI Practitioner for Godel</span>
-          </span>
-        </a>
+        <div class="brand-cluster">
+          <a class="brand clickable" href="#mission" data-cursor="burst" aria-label="Go to mission section">
+            <span class="brand-mark">MO</span>
+            <span class="brand-copy">
+              <strong>Michał Olesiak</strong>
+              <span>AI Practitioner for Godel</span>
+            </span>
+          </a>
+          <button
+            class="brand-action clickable"
+            id="greetingToggle"
+            type="button"
+            aria-pressed="false"
+            aria-label="Play greeting"
+          >
+            <span class="brand-action-icon" id="greetingIcon" aria-hidden="true">▶</span>
+            <span id="greetingLabel">Play greeting</span>
+          </button>
+          <audio class="brand-audio" id="greetingAudio" preload="metadata">
+            <source src="greeting.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
 
         <div class="topbar-meta" aria-label="Contact details">
           <span class="topbar-meta-item">
@@ -1384,6 +1447,22 @@
       const revealNodes = document.querySelectorAll(".reveal");
       const stackToggle = document.getElementById("stackToggle");
       const stackBundle = document.getElementById("stackBundle");
+      const greetingAudio = document.getElementById("greetingAudio");
+      const greetingToggle = document.getElementById("greetingToggle");
+      const greetingLabel = document.getElementById("greetingLabel");
+      const greetingIcon = document.getElementById("greetingIcon");
+
+      function syncGreetingButton() {
+        if (!greetingAudio || !greetingToggle || !greetingLabel || !greetingIcon) {
+          return;
+        }
+
+        const isPlaying = !greetingAudio.paused && !greetingAudio.ended;
+        greetingToggle.setAttribute("aria-pressed", String(isPlaying));
+        greetingToggle.setAttribute("aria-label", isPlaying ? "Pause greeting" : "Play greeting");
+        greetingLabel.textContent = isPlaying ? "Pause greeting" : "Play greeting";
+        greetingIcon.textContent = isPlaying ? "❚❚" : "▶";
+      }
 
       function updateProgress() {
         const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -1412,6 +1491,34 @@
           const isStatic = stackBundle.classList.toggle("static-view");
           stackToggle.setAttribute("aria-pressed", String(isStatic));
           stackToggle.textContent = isStatic ? "Start Animation" : "Stop Animation";
+        });
+      }
+
+      if (greetingAudio && greetingToggle) {
+        syncGreetingButton();
+
+        greetingToggle.addEventListener("click", async () => {
+          try {
+            if (greetingAudio.ended) {
+              greetingAudio.currentTime = 0;
+            }
+
+            if (greetingAudio.paused) {
+              await greetingAudio.play();
+            } else {
+              greetingAudio.pause();
+            }
+          } catch (error) {
+            console.error("Greeting audio playback failed", error);
+          } finally {
+            syncGreetingButton();
+          }
+        });
+
+        ["ended", "pause", "play"].forEach((eventName) => {
+          greetingAudio.addEventListener(eventName, () => {
+            syncGreetingButton();
+          });
         });
       }
     </script>

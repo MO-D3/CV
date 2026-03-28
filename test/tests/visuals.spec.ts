@@ -1,5 +1,19 @@
 import { test, expect } from '@playwright/test';
 
+const switchToPolish = async (page) => {
+  const desktopPL = page.getByRole('button', { name: 'PL' });
+  if (await desktopPL.first().isVisible()) {
+    await desktopPL.first().click();
+    return;
+  }
+
+  const menuToggle = page.locator('#menuToggle');
+  if (await menuToggle.isVisible()) {
+    await menuToggle.click();
+    await page.locator('#btnPLm').click();
+  }
+};
+
 test.describe('Landing visuals', () => {
   test('home — full page', async ({ page }) => {
     await page.goto('/index.html');
@@ -15,7 +29,7 @@ test.describe('Landing visuals', () => {
 
   test('home — full page in Polish (desktop)', async ({ page }) => {
     await page.goto('/index.html');
-    await page.getByRole('button', { name: 'PL' }).click();
+    await switchToPolish(page);
     await page.getByRole('heading', { level: 1 }).waitFor();
     await expect(page).toHaveScreenshot('home-full-pl-desktop.png', { fullPage: true });
   });
@@ -24,10 +38,10 @@ test.describe('Landing visuals', () => {
 // Mobile-only visual of the hamburger menu (runs where the toggle is visible)
 
 test('mobile menu — opened state', async ({ page }) => {
+  await page.goto('/index.html');
   const toggle = page.locator('#menuToggle');
   // Skip if the toggle isn’t visible in this project (desktop viewports)
-  test.skip(await toggle.count() === 0, 'Hamburger not present at this viewport');
-  await page.goto('/index.html');
+  test.skip(!(await toggle.isVisible()), 'Hamburger not present at this viewport');
   await toggle.click();
   const panel = page.locator('#mobileMenu');
   await expect(panel).toBeVisible();
@@ -35,10 +49,10 @@ test('mobile menu — opened state', async ({ page }) => {
 });
 
 test('home — full page in Polish (mobile)', async ({ page }) => {
-  const toggle = page.locator('#menuToggle');
-  test.skip(await toggle.count() === 0, 'Hamburger not present at this viewport');
   await page.goto('/index.html');
-  await page.getByRole('button', { name: 'PL' }).click();
+  const toggle = page.locator('#menuToggle');
+  test.skip(!(await toggle.isVisible()), 'Hamburger not present at this viewport');
+  await switchToPolish(page);
   await page.getByRole('heading', { level: 1 }).waitFor();
   await expect(page).toHaveScreenshot('home-full-pl-mobile.png', { fullPage: true });
 });

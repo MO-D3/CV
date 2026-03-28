@@ -3,292 +3,692 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Michał Olesiak — Timeline</title>
-    <meta name="description" content="Interactive, accessible career timeline of Michał Olesiak (WCAG 2.1 AA)." />
+    <title>Michał Olesiak - Quality Engineering and AI Automation</title>
+    <meta
+      name="description"
+      content="CV page of Michał Olesiak, an experienced quality engineer focused on proactive QA ownership, automation, and AI-enabled delivery."
+    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2312211d'/%3E%3Ctext x='50' y='61' text-anchor='middle' font-size='50' fill='%23eef5ef' font-family='Arial'%3EM%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            colors: { accent: { green: '#BBF7D0', red: '#FECACA', blue: '#BFDBFE' } },
-            boxShadow: { soft: '0 10px 20px rgba(2, 6, 23, 0.06)' }
+            colors: {
+              ink: '#12211d',
+              fog: '#eef5ef',
+              mint: '#b9efd6',
+              sky: '#b8e8f5',
+              sand: '#f8e4bc',
+              coral: '#f8c4ae'
+            },
+            boxShadow: {
+              float: '0 24px 45px rgba(18, 33, 29, 0.15)',
+              soft: '0 10px 24px rgba(18, 33, 29, 0.08)'
+            }
           }
         }
       };
     </script>
 
     <style>
-      :focus-visible { outline: 3px solid #1e40af; outline-offset: 3px; }
-      @media (prefers-reduced-motion: reduce) { .reveal { transition: none !important; transform: none !important; } html { scroll-behavior: auto; } }
-      .reveal { opacity: 0; transform: translateY(16px); transition: opacity 700ms ease, transform 700ms ease; }
-      .reveal.is-visible { opacity: 1; transform: translateY(0); }
-      #progressBar { height: 6px; background: #1e293b; width: 0%; }
-      .badge { display:inline-flex; align-items:center; padding:0.25rem 0.6rem; border-radius:9999px; border:1px solid rgb(226 232 240); background:white; font-size:0.875rem; }
+      :root {
+        --bg-base: #f8fcf8;
+        --bg-alt: #e8f5ed;
+        --text-main: #12211d;
+        --text-muted: #35534b;
+        --line: #c6ddd2;
+        --glass: rgba(255, 255, 255, 0.72);
+        --focus: #0e7490;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Sora', sans-serif;
+        color: var(--text-main);
+        background:
+          radial-gradient(circle at 12% 12%, rgba(184, 232, 245, 0.52), transparent 46%),
+          radial-gradient(circle at 88% 14%, rgba(248, 228, 188, 0.55), transparent 44%),
+          radial-gradient(circle at 76% 72%, rgba(185, 239, 214, 0.65), transparent 41%),
+          linear-gradient(160deg, var(--bg-base), var(--bg-alt));
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+        background-image: linear-gradient(rgba(18, 33, 29, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(18, 33, 29, 0.03) 1px, transparent 1px);
+        background-size: 28px 28px;
+        mask-image: radial-gradient(circle at center, black 38%, transparent 100%);
+      }
+
+      .mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .glass {
+        background: var(--glass);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.72);
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 9999px;
+        border: 1px solid #d2e6db;
+        padding: 0.28rem 0.8rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      #progressBar {
+        height: 5px;
+        width: 0;
+        background: linear-gradient(90deg, #0f766e, #0e7490, #ca8a04);
+      }
+
+      .timeline-line {
+        position: relative;
+      }
+
+      .timeline-line::before {
+        content: '';
+        position: absolute;
+        left: 11px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        border-radius: 9999px;
+        background: linear-gradient(180deg, #0f766e 0%, #0e7490 42%, #ca8a04 100%);
+      }
+
+      .timeline-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 4px solid #f8fcf8;
+        background: #0f766e;
+        box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.2);
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 3px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 700ms ease, transform 700ms ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .reveal {
+          transition: none !important;
+          transform: none !important;
+        }
+      }
     </style>
   </head>
-  <body class="min-h-screen bg-white text-slate-900 antialiased">
-    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:bg-white focus:text-slate-900 focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-soft" data-i18n="skip">Przejdź do głównej treści</a>
+  <body class="antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:px-4 focus:py-2 focus:rounded-xl focus:bg-white focus:text-ink focus:shadow-soft"
+      data-i18n="skip"
+      >Skip to main content</a
+    >
 
-    <div class="fixed top-0 left-0 right-0 z-50" aria-hidden="true"><div id="progressBar" role="presentation"></div></div>
+    <div class="fixed top-0 left-0 right-0 z-50" aria-hidden="true"><div id="progressBar"></div></div>
 
     <header class="relative overflow-hidden">
-      <div aria-hidden="true" class="pointer-events-none absolute inset-0 opacity-50">
-        <div class="absolute -top-20 -left-20 w-96 h-96 rounded-full bg-accent-green blur-3xl"></div>
-        <div class="absolute top-24 -right-10 w-80 h-80 rounded-full bg-accent-red blur-3xl"></div>
-        <div class="absolute -bottom-24 left-1/3 w-96 h-96 rounded-full bg-accent-blue blur-3xl"></div>
+      <div class="absolute inset-0 pointer-events-none -z-10" aria-hidden="true">
+        <div class="absolute -top-32 -left-28 h-96 w-96 rounded-full bg-sky blur-3xl opacity-70"></div>
+        <div class="absolute -bottom-24 right-6 h-80 w-80 rounded-full bg-mint blur-3xl opacity-70"></div>
+        <div class="absolute top-16 right-1/3 h-72 w-72 rounded-full bg-sand blur-3xl opacity-70"></div>
       </div>
 
-      <nav class="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-4 py-6 sm:px-6 lg:px-8" aria-label="Primary">
-        <a href="#" class="inline-flex items-center gap-2 font-semibold tracking-tight" aria-label="Home">
-          <span class="inline-block h-3 w-3 rounded-full bg-accent-green" aria-hidden="true"></span>
-          <span class="inline-block h-3 w-3 rounded-full bg-accent-red" aria-hidden="true"></span>
-          <span class="inline-block h-3 w-3 rounded-full bg-accent-blue" aria-hidden="true"></span>
-          <span aria-hidden="true" class="text-lg">MO</span>
+      <nav
+        class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-6 sm:px-6 lg:px-8"
+        aria-label="Primary"
+      >
+        <a href="#" class="inline-flex items-center gap-3 text-ink" aria-label="Home">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-ink text-fog mono text-sm font-bold">MO</span>
+          <span class="text-sm font-semibold tracking-wide">Michał Olesiak</span>
         </a>
-        <button id="menuToggle" class="hidden max-[507px]:inline-flex items-center justify-center rounded-md border border-slate-300 px-3 py-2 text-sm" aria-controls="mobileMenu" aria-expanded="false" aria-label="Otwórz menu">
+
+        <button
+          id="menuToggle"
+          class="md:hidden inline-flex items-center justify-center rounded-lg border border-[#bfd7cc] bg-white/80 px-3 py-2"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+          aria-label="Open menu"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-            <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+            <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
           </svg>
         </button>
-        <ul class="max-[507px]:hidden flex items-center gap-4 text-sm" role="list">
-          <li><a class="hover:underline focus:underline" href="#timeline" data-i18n="nav_timeline">Oś czasu</a></li>
-          <li><a class="hover:underline focus:underline" href="#tech" data-i18n="nav_tech">Tech stack</a></li>
-          <li><a class="hover:underline focus:underline" href="#education" data-i18n="nav_edu">Edukacja</a></li>
-          <li><a class="hover:underline focus:underline" href="#contact" data-i18n="nav_contact">Kontakt</a></li>
-          <li class="ml-auto shrink-0">
-            <div class="relative z-10 inline-flex rounded-lg border border-slate-300" role="group" aria-label="Language switcher">
-              <button id="btnPL" type="button" class="px-3 py-1 text-sm aria-selected:bg-slate-900 aria-selected:text-white" aria-pressed="false">PL</button>
+
+        <ul class="hidden md:flex items-center gap-5 text-sm" role="list">
+          <li><a href="#timeline" class="font-medium hover:underline" data-i18n="nav_timeline">Experience</a></li>
+          <li><a href="#projects" class="font-medium hover:underline" data-i18n="nav_projects">Projects</a></li>
+          <li><a href="#tech" class="font-medium hover:underline" data-i18n="nav_tech">Tech</a></li>
+          <li><a href="#contact" class="font-medium hover:underline" data-i18n="nav_contact">Contact</a></li>
+          <li>
+            <div class="inline-flex rounded-lg border border-[#bfd7cc] bg-white/80" role="group" aria-label="Language switcher">
+              <button id="btnPL" type="button" class="px-3 py-1 text-sm" aria-pressed="false">PL</button>
               <button id="btnEN" type="button" class="px-3 py-1 text-sm" aria-pressed="true">EN</button>
             </div>
           </li>
         </ul>
-      <div id="mobileMenu" class="hidden max-[507px]:absolute max-[507px]:left-0 max-[507px]:right-0 max-[507px]:top-full max-[507px]:mt-2 max-[507px]:rounded-xl max-[507px]:border max-[507px]:border-slate-200 max-[507px]:bg-white max-[507px]:shadow-soft" role="dialog" aria-label="Menu">
-        <ul class="flex flex-col p-3 gap-2" role="list">
-          <li><a class="block rounded-lg px-3 py-2 hover:bg-slate-50 focus:bg-slate-50" href="#timeline" data-i18n="nav_timeline">Oś czasu</a></li>
-          <li><a class="block rounded-lg px-3 py-2 hover:bg-slate-50 focus:bg-slate-50" href="#tech" data-i18n="nav_tech">Tech stack</a></li>
-          <li><a class="block rounded-lg px-3 py-2 hover:bg-slate-50 focus:bg-slate-50" href="#education" data-i18n="nav_edu">Edukacja</a></li>
-          <li><a class="block rounded-lg px-3 py-2 hover:bg-slate-50 focus:bg-slate-50" href="#contact" data-i18n="nav_contact">Kontakt</a></li>
-        </ul>
-        <div class="border-t border-slate-200 p-3">
-          <div class="inline-flex rounded-lg border border-slate-300" role="group" aria-label="Language switcher">
-            <button id="btnPLm" type="button" class="px-3 py-1 text-sm aria-selected:bg-slate-900 aria-selected:text-white" aria-pressed="false">PL</button>
-            <button id="btnENm" type="button" class="px-3 py-1 text-sm" aria-pressed="true">EN</button>
+
+        <div
+          id="mobileMenu"
+          class="hidden md:hidden absolute left-4 right-4 top-[88px] z-20 rounded-2xl border border-[#c8ddd3] bg-white/95 p-4 shadow-float"
+          role="dialog"
+          aria-label="Menu"
+        >
+          <ul class="space-y-2" role="list">
+            <li><a href="#timeline" class="block rounded-lg px-3 py-2 hover:bg-fog" data-i18n="nav_timeline">Experience</a></li>
+            <li><a href="#projects" class="block rounded-lg px-3 py-2 hover:bg-fog" data-i18n="nav_projects">Projects</a></li>
+            <li><a href="#tech" class="block rounded-lg px-3 py-2 hover:bg-fog" data-i18n="nav_tech">Tech</a></li>
+            <li><a href="#contact" class="block rounded-lg px-3 py-2 hover:bg-fog" data-i18n="nav_contact">Contact</a></li>
+          </ul>
+          <div class="mt-3 border-t border-[#d6e7df] pt-3">
+            <div class="inline-flex rounded-lg border border-[#bfd7cc]" role="group" aria-label="Language switcher">
+              <button id="btnPLm" type="button" class="px-3 py-1 text-sm" aria-pressed="false">PL</button>
+              <button id="btnENm" type="button" class="px-3 py-1 text-sm" aria-pressed="true">EN</button>
+            </div>
           </div>
         </div>
-      </div>
       </nav>
 
-      <section class="mx-auto max-w-5xl px-4 pb-16 pt-6 sm:px-6 lg:px-8" aria-labelledby="hero-heading">
-        <h1 id="hero-heading" class="reveal text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl" data-i18n="hero_h1">Podróż przez moją historię zawodową</h1>
-        <p class="reveal mt-4 max-w-2xl text-lg leading-relaxed text-slate-700" data-i18n="hero_p">Od najnowszych projektów i odpowiedzialności po początki kariery — skupiam się na doświadczeniu zawodowym, jakości i automatyzacji.</p>
+      <section class="mx-auto max-w-6xl px-4 pb-14 pt-4 sm:px-6 lg:px-8">
+        <div class="glass card-glow reveal rounded-3xl p-7 shadow-float sm:p-10">
+          <p class="text-sm font-semibold tracking-wide text-[#285148]" data-i18n="hero_kicker">Michał Olesiak</p>
+          <h1 class="mt-4 max-w-4xl text-balance text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl" data-i18n="hero_h1">
+            Experienced quality engineer creating measurable impact through proactive ownership and AI-powered automation.
+          </h1>
+          <p class="mt-5 max-w-3xl text-base leading-relaxed text-[#35534b] sm:text-lg" data-i18n="hero_p">
+            At HSBC I lead quality initiatives across customer-facing products and design systems. In Paily I build a QR payments product for restaurants from idea to pilot readiness.
+          </p>
+
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href="#timeline" class="inline-flex items-center rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-fog hover:brightness-110" data-i18n="hero_cta_timeline">Experience</a>
+            <a href="#projects" class="inline-flex items-center rounded-full border border-[#bfd7cc] bg-white px-5 py-2.5 text-sm font-semibold text-ink hover:bg-fog" data-i18n="hero_cta_project">Paily</a>
+            <a href="#contact" class="inline-flex items-center rounded-full border border-[#bfd7cc] bg-white px-5 py-2.5 text-sm font-semibold text-ink hover:bg-fog" data-i18n="hero_cta_contact">Contact</a>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-2">
+            <span class="chip" data-i18n="hero_chip_role">Senior Test Automation Engineer</span>
+            <span class="chip" data-i18n="hero_chip_focus">Proactive QA leadership</span>
+            <a href="https://paily.pl" target="_blank" rel="noopener noreferrer" class="chip text-ink no-underline hover:bg-fog focus:bg-fog" data-i18n="hero_chip_project">Paily founder and builder</a>
+            <span class="chip">TypeScript</span>
+            <span class="chip">Playwright</span>
+            <span class="chip">CI/CD</span>
+            <span class="chip">Java</span>
+          </div>
+        </div>
       </section>
     </header>
 
     <main id="main" class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <!-- TIMELINE (newest → oldest) -->
-      <section id="timeline" aria-labelledby="timeline-heading" class="mb-24">
-        <div class="reveal mb-8 flex items-center justify-between">
-          <h2 id="timeline-heading" class="text-3xl font-bold tracking-tight" data-i18n="timeline_h2">Oś czasu (najnowsze → najstarsze)</h2>
-          <div role="status" aria-live="polite" class="text-sm text-slate-600"><span data-i18n="timeline_pos">Pozycja na stronie:</span> <span id="spyLabel">Start</span></div>
+      <section id="timeline" aria-labelledby="timeline-heading" class="mb-20">
+        <div class="reveal mb-8">
+          <div>
+            <h2 id="timeline-heading" class="text-3xl font-bold tracking-tight" data-i18n="timeline_h2">Experience</h2>
+            <p class="mt-2 max-w-3xl text-[#35534b]" data-i18n="timeline_p">
+              Timeline of roles where I built automation foundations, improved release confidence, and drove QA ownership.
+            </p>
+          </div>
         </div>
 
-        <ol class="relative border-l-4 border-slate-900 pl-6" role="list" aria-label="Timeline">
-          <!-- Today -->
-          <li id="item-today" class="reveal mb-12">
-            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
-            <time class="inline-block rounded-full bg-accent-red px-3 py-1 text-sm font-semibold" datetime="2025-08" data-i18n="t_today_time">Dziś</time>
-            <h3 class="mt-3 text-xl font-bold" data-i18n="t_today_h3">QA Automation — praktyki i standardy</h3>
-            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_today_p">Skaluję automatyzację (Playwright, accessibility, performance), buduję dobre praktyki zespołowe, wspieram wdrażam nowe technologie i podejścia.</p>
-            <div class="mt-3 flex flex-wrap gap-2" aria-label="Highlights">
-              <span class="badge">Playwright</span><span class="badge">TypeScript</span><span class="badge">a11y</span><span class="badge">CI/CD</span>
-            </div>
+        <ol class="timeline-line space-y-8 pl-0" role="list" aria-label="Timeline">
+          <li class="reveal relative pl-10">
+            <div class="timeline-dot absolute -ml-[41px] mt-1" aria-hidden="true"></div>
+            <article class="card-glow rounded-3xl border border-[#c2dacf] bg-white/82 p-6 shadow-soft">
+              <time class="chip mono" datetime="2026-03-01" data-i18n="timeline_now_time">03.2026 - present</time>
+              <h3 class="mt-4 text-2xl font-bold" data-i18n="timeline_now_h3">HSBC - Senior Test Automation Engineer</h3>
+              <p class="mt-3 text-[#35534b]" data-i18n="timeline_now_story">
+                Since 01.03.2026 I have been expanding AI-supported QA across the delivery lifecycle, from requirements and documentation to day-to-day BAU.
+              </p>
+              <ul class="mt-4 list-disc space-y-2 pl-5 text-[#35534b]">
+                <li data-i18n="timeline_now_li1">QA SME within a sub-value stream of around 15 testers, supporting standards and execution.</li>
+                <li data-i18n="timeline_now_li2">Presented AI quality use cases to MD/C-level leadership; selected ideas became delivery initiatives.</li>
+                <li data-i18n="timeline_now_li3">Stepped into interim Product Owner ownership (3-4 week periods) for a team of 6 developers and 2 QAs when needed.</li>
+              </ul>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="chip">AI for QA</span>
+                <span class="chip">Figma to Dev</span>
+                <span class="chip">Playwright</span>
+                <span class="chip">Release Quality</span>
+              </div>
+            </article>
           </li>
 
-          <!-- HSBC -->
-          <li id="item-2022-hsbc" class="reveal mb-12">
-            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
-            <time class="inline-block rounded-full bg-accent-blue px-3 py-1 text-sm font-semibold" datetime="2022-08" data-i18n="t_hsbc_time">08.2022 - obecnie</time>
-            <h3 class="mt-3 text-xl font-bold" data-i18n="t_hsbc_h3">HSBC — QA Automation Engineer</h3>
-            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_hsbc_p">Prowadzenie QA, strategie testów i frameworki. Integracyjne i wizualne testy (Playwright), API i wydajność, wsparcie release.</p>
-            <ul class="mt-3 list-disc space-y-2 pl-6 text-slate-700">
-              <li data-i18n="t_hsbc_li1"><strong>Browser Design Library:</strong> integracja + testy wizualne + testy performance + automatyczna regresja accessibility, wzrost pokrycia.</li>
-              <li data-i18n="t_hsbc_li2"><strong>M&amp;S Cards &amp; Loans:</strong> 100% automatyzacji dla kart, ~80% dla pożyczek; API (Postman), Java, Cucumber, RestAssured, performance (Gatling/JMeter). <a class="underline decoration-2 underline-offset-2 focus:underline hover:underline" href="https://www.msbank.com" target="_blank" rel="noopener noreferrer" data-i18n="t_hsbc_ms">Odwiedź M&amp;S Bank</a>.</li>
-              <li data-i18n="t_hsbc_li3"><strong>HSBC Pay:</strong> ścieżki krytyczne, UAT, doradztwo dot. kredytów i architektury.</li>
-              <li data-i18n="t_hsbc_li4"><strong>WCAO:</strong> Cucumber, reużywalne kroki, manualne testy API.</li>
-              <li data-i18n="t_hsbc_li5"><strong>Inicjatywy:</strong> zarządzanie urządzeniami testowymi, kurs Java + mentoring 14 testerów.</li>
-            </ul>
-            <div class="mt-3 flex flex-wrap gap-2" aria-label="Skills">
-              <span class="badge">Java</span>
-              <span class="badge">Postman</span>
-              <span class="badge">Cucumber</span>
-              <span class="badge">RestAssured</span>
-              <span class="badge">Critical Thinking</span>
-              <span class="badge">Process Management</span>
-              <span class="badge">Release Management</span>
-            </div>
+          <li class="reveal relative pl-10">
+            <div class="timeline-dot absolute -ml-[41px] mt-1" aria-hidden="true"></div>
+            <article class="card-glow rounded-3xl border border-[#c2dacf] bg-white/82 p-6 shadow-soft">
+              <time class="chip mono" datetime="2025-12" data-i18n="timeline_paily_time">12.2025 - present</time>
+              <h3 class="mt-4 text-2xl font-bold" data-i18n="timeline_paily_h3">Paily / PAILY - Full-stack personal project</h3>
+              <p class="mt-3 text-[#35534b]" data-i18n="timeline_paily_story">
+                I design and build a multi-tenant QR payments platform for restaurants, currently in pilot preparation with real customer discovery and integration conversations.
+              </p>
+              <ul class="mt-4 list-disc space-y-2 pl-5 text-[#35534b]">
+                <li data-i18n="timeline_paily_li1">Guest flow: QR scan, live bill view, split per person, tips, partial/full checkout, PDF receipt export.</li>
+                <li data-i18n="timeline_paily_li2">Pilot preparation: integration discussions with Tpay and Dotykačka plus ongoing conversations with restaurant customers.</li>
+                <li data-i18n="timeline_paily_li3">Core reliability: real-time multi-guest sync, item locking, backend source of truth for prices and settlement states.</li>
+                <li data-i18n="timeline_paily_li4">Product work beyond coding: sales conversations, conference and startup meeting participation, UX reviews, and iterative feature planning.</li>
+              </ul>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="chip">Java 21</span>
+                <span class="chip">Spring Boot</span>
+                <span class="chip">React + TypeScript</span>
+                <span class="chip">PostgreSQL + Redis</span>
+                <span class="chip">Playwright</span>
+              </div>
+            </article>
           </li>
 
-          <!-- FDM -->
-          <li id="item-2022-fdm" class="reveal mb-12">
-            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
-            <time class="inline-block rounded-full bg-accent-green px-3 py-1 text-sm font-semibold" datetime="2022-05">05.2022 - 08.2022</time>
-            <h3 class="mt-3 text-xl font-bold" data-i18n="t_2022fdm_h3">FDM Group — Java Developer Trainee</h3>
-            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_2022fdm_p">8h/dzień szkoleń z inżynierii oprogramowania, projekt zespołowy: wymagania → implementacja → dokumentacja → prezentacja.</p>
-            <div class="mt-3 flex flex-wrap gap-2" aria-label="Skills">
-              <span class="badge">Java</span>
-              <span class="badge">Spring</span>
-              <span class="badge">Linux</span>
-              <span class="badge">Ubuntu</span>
-            </div>
+          <li class="reveal relative pl-10">
+            <div class="timeline-dot absolute -ml-[41px] mt-1" aria-hidden="true"></div>
+            <article class="rounded-3xl border border-[#c2dacf] bg-white/80 p-6 shadow-soft">
+              <time class="chip mono" datetime="2022-08" data-i18n="timeline_hsbc_prev_time">08.2022 - 02.2026</time>
+              <h3 class="mt-4 text-2xl font-bold" data-i18n="timeline_hsbc_prev_h3">HSBC - Test Automation Engineer</h3>
+              <p class="mt-3 text-[#35534b]" data-i18n="timeline_hsbc_prev_story">
+                Joined a mature project with no QA automation and helped build a scalable QA foundation across design systems, payments, and lending.
+              </p>
+              <ul class="mt-4 list-disc space-y-2 pl-5 text-[#35534b]">
+                <li data-i18n="timeline_hsbc_prev_li1">Introduced Playwright and built a full testing framework for the Design System.</li>
+                <li data-i18n="timeline_hsbc_prev_li2">Implemented CI/CD-supported automation, including visual checks in the developer pipeline for immediate feedback.</li>
+                <li data-i18n="timeline_hsbc_prev_li3">Coverage outcomes: M&S Cards around 90%, M&S Loans around 50%, and Design Libraries from 0% to 100% visual, 90% functional, and 100% accessibility coverage in about 1.5 years.</li>
+                <li data-i18n="timeline_hsbc_prev_li4">Owned release preparation, in-development QA, daily regression, production support, and performance testing for customer-facing banking journeys.</li>
+              </ul>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="chip">Java</span>
+                <span class="chip">Cucumber</span>
+                <span class="chip">RestAssured</span>
+                <span class="chip">Performance Testing</span>
+              </div>
+            </article>
           </li>
 
-          <!-- AQForm -->
-          <li id="item-2021" class="reveal mb-12">
-            <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-900" aria-hidden="true"></div>
-            <time class="inline-block rounded-full bg-accent-red px-3 py-1 text-sm font-semibold" datetime="2021">04.2021 - 05.2022</time>
-            <h3 class="mt-3 text-xl font-bold" data-i18n="t_2021_h3">AQForm — Technik Laboratorium i Elektronik</h3>
-            <p class="mt-2 max-w-3xl text-slate-700" data-i18n="t_2021_p">Pomiary i testy zgodności (fotometria, EMC, bezpieczeństwo fotobiologiczne). Dbałość o jakość i dokumentację.</p>
+          <li class="reveal relative pl-10">
+            <div class="timeline-dot absolute -ml-[41px] mt-1" aria-hidden="true"></div>
+            <article class="rounded-3xl border border-[#c2dacf] bg-white/76 p-6 shadow-soft">
+              <time class="chip mono" datetime="2022-05" data-i18n="timeline_fdm_time">05.2022 - 08.2022</time>
+              <h3 class="mt-4 text-2xl font-bold" data-i18n="timeline_fdm_h3">FDM Group - Java Developer Trainee</h3>
+              <p class="mt-3 text-[#35534b]" data-i18n="timeline_fdm_story">Intensive engineering training and team software delivery from requirements to demo.</p>
+            </article>
+          </li>
+
+          <li class="reveal relative pl-10">
+            <div class="timeline-dot absolute -ml-[41px] mt-1" aria-hidden="true"></div>
+            <article class="rounded-3xl border border-[#c2dacf] bg-white/76 p-6 shadow-soft">
+              <time class="chip mono" datetime="2021-04" data-i18n="timeline_aq_time">04.2021 - 05.2022</time>
+              <h3 class="mt-4 text-2xl font-bold" data-i18n="timeline_aq_h3">AQForm - Lab Technician and Electronics</h3>
+              <p class="mt-3 text-[#35534b]" data-i18n="timeline_aq_story">Built precision habits through compliance testing, photometry and technical documentation.</p>
+            </article>
           </li>
         </ol>
       </section>
 
-      <!-- TECH STACK -->
-      <section id="tech" aria-labelledby="tech-heading" class="reveal mb-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <h2 id="tech-heading" class="text-2xl font-bold tracking-tight" data-i18n="tech_h2">Tech stack</h2>
-        <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          <div class="badge">Playwright</div>
-          <div class="badge">TypeScript</div>
-          <div class="badge">Java</div>
-          <div class="badge">Node.js</div>
-          <div class="badge">Cucumber</div>
-          <div class="badge">Postman</div>
-          <div class="badge">REST</div>
-          <div class="badge">JMeter / Gatling</div>
-          <div class="badge">Axe-core (a11y)</div>
-          <div class="badge">Lighthouse</div>
-          <div class="badge">Jenkins / GitHub Actions</div>
-          <div class="badge">Docker (basic)</div>
+      <section id="projects" aria-labelledby="projects-heading" class="mb-20">
+        <div class="reveal relative overflow-hidden rounded-3xl border border-[#c4dacf] bg-white/80 p-6 shadow-soft sm:p-8">
+          <img
+            src="assets/paily-light.png"
+            alt=""
+            aria-hidden="true"
+            class="pointer-events-none absolute -right-20 -top-16 hidden w-72 select-none opacity-10 lg:block"
+          />
+          <h2 id="projects-heading" class="text-3xl font-bold tracking-tight" data-i18n="projects_h2">Paily</h2>
+          <p class="mt-3 max-w-3xl text-[#35534b]" data-i18n="projects_p">
+            A restaurant QR payments product I am building end to end, now in pilot preparation with real customer conversations and integration work.
+          </p>
+
+          <div class="mt-6 grid gap-4 md:grid-cols-2">
+            <article class="card-glow rounded-2xl border border-[#d2e5dc] bg-fog/80 p-5">
+              <h3 class="font-bold" data-i18n="projects_card1_title">Guest checkout</h3>
+              <p class="mt-2 text-sm text-[#35534b]" data-i18n="projects_card1_text">QR flow with live bill view, split bill, partial payments, tips and PDF receipt download.</p>
+            </article>
+            <article class="card-glow rounded-2xl border border-[#d2e5dc] bg-fog/80 p-5">
+              <h3 class="font-bold" data-i18n="projects_card2_title">Staff and admin</h3>
+              <p class="mt-2 text-sm text-[#35534b]" data-i18n="projects_card2_text">Operational portal for tables, menu, billing, onboarding and tenant management, with pilot integration discussions.</p>
+            </article>
+            <article class="card-glow rounded-2xl border border-[#d2e5dc] bg-fog/80 p-5">
+              <h3 class="font-bold" data-i18n="projects_card3_title">Billing and sync</h3>
+              <p class="mt-2 text-sm text-[#35534b]" data-i18n="projects_card3_text">Real-time guest synchronization, item locking, and backend control over price and settlement state.</p>
+            </article>
+            <article class="card-glow rounded-2xl border border-[#d2e5dc] bg-fog/80 p-5">
+              <h3 class="font-bold" data-i18n="projects_card4_title">Testing</h3>
+              <p class="mt-2 text-sm text-[#35534b]" data-i18n="projects_card4_text">Quality architecture with unit, integration, API and E2E coverage, plus performance and frontend quality checks.</p>
+            </article>
+          </div>
+
+          <div class="mt-8 rounded-2xl border border-[#d2e5dc] bg-white p-5">
+            <h3 class="font-bold" data-i18n="projects_test_h3">Testing and quality</h3>
+            <ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-[#35534b]">
+              <li data-i18n="projects_test_li1">JUnit + Spring Boot integration tests for domain logic, security rules, limits and receipt flows.</li>
+              <li data-i18n="projects_test_li2">Playwright API tests for endpoint contracts and backend flow coverage.</li>
+              <li data-i18n="projects_test_li3">Playwright E2E flows for guest, staff and admin journeys.</li>
+              <li data-i18n="projects_test_li4">Load and soak suites with HTML/JSON reporting plus frontend SEO/build quality checks.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      <!-- EDUCATION -->
-      <section id="education" aria-labelledby="edu-heading" class="reveal mb-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <h2 id="edu-heading" class="text-2xl font-bold tracking-tight" data-i18n="edu_h2">Edukacja</h2>
-        <ul class="mt-4 space-y-4" role="list">
-          <li class="rounded-xl border border-slate-200 p-4">
-            <div class="flex items-center gap-2"><time class="text-sm font-semibold rounded-full bg-accent-green px-2 py-0.5">2023-2025</time><span class="text-sm text-slate-600" data-i18n="edu_msc_school">AGH — Zarządzanie i Inżynieria Produkcji</span></div>
-            <p class="mt-1 text-slate-700" data-i18n="edu_msc_desc">Magister (ZiIP). Tematy: Zwinne zarządzanie projektami IT, wyzwania i dobre praktyki.</p>
+      <section id="tech" aria-labelledby="tech-heading" class="reveal mb-20 rounded-3xl border border-[#c4dacf] bg-white/80 p-6 shadow-soft sm:p-8">
+        <h2 id="tech-heading" class="text-3xl font-bold tracking-tight" data-i18n="tech_h2">Tech stack</h2>
+        <p class="mt-2 text-[#35534b]" data-i18n="tech_p">Tools I use to ship reliable systems and automate quality at scale.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="chip">Java 21</span>
+          <span class="chip">Spring Boot</span>
+          <span class="chip">React</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">Vite</span>
+          <span class="chip">Playwright</span>
+          <span class="chip">JUnit</span>
+          <span class="chip">Cucumber</span>
+          <span class="chip">RestAssured</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Redis</span>
+          <span class="chip">GitHub Actions</span>
+          <span class="chip">JMeter / Gatling</span>
+          <span class="chip">OpenAPI</span>
+        </div>
+      </section>
+
+      <section id="education" aria-labelledby="edu-heading" class="reveal mb-20 rounded-3xl border border-[#c4dacf] bg-white/80 p-6 shadow-soft sm:p-8">
+        <h2 id="edu-heading" class="text-3xl font-bold tracking-tight" data-i18n="edu_h2">Education</h2>
+        <ul class="mt-5 space-y-4" role="list">
+          <li class="rounded-2xl border border-[#d2e5dc] bg-white p-4">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="chip mono">2023 - 2025</span>
+              <span class="text-sm text-[#35534b]" data-i18n="edu_msc_school">AGH - Management and Production Engineering</span>
+            </div>
+            <p class="mt-2 text-sm text-[#35534b]" data-i18n="edu_msc_desc">Master's thesis practical outcome: people-first delivery, critical thinking, strong relationships, and ownership are key to sustainable project success.</p>
           </li>
-          <li class="rounded-xl border border-slate-200 p-4">
-            <div class="flex items-center gap-2"><time class="text-sm font-semibold rounded-full bg-accent-blue px-2 py-0.5">2018-2022</time><span class="text-sm text-slate-600" data-i18n="edu_beng_school">AGH — studia inżynierskie</span></div>
-            <p class="mt-1 text-slate-700" data-i18n="edu_beng_desc">Inżynier Elektechniki, pierwsze doświadczenia techniczne i praca laboratoryjna.</p>
+          <li class="rounded-2xl border border-[#d2e5dc] bg-white p-4">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="chip mono">2018 - 2022</span>
+              <span class="text-sm text-[#35534b]" data-i18n="edu_beng_school">AGH - Electrical Engineering</span>
+            </div>
+            <p class="mt-2 text-sm text-[#35534b]" data-i18n="edu_beng_desc">Engineering degree with hands-on technical and laboratory experience.</p>
           </li>
         </ul>
       </section>
 
-      <!-- CONTACT -->
-      <section id="contact" aria-labelledby="contact-heading" class="reveal mb-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <h2 id="contact-heading" class="text-2xl font-bold tracking-tight" data-i18n="contact_h2">Kontakt</h2>
-        <p class="mt-2 text-slate-700"><span data-i18n="contact_p">Masz pytania lub chcesz porozmawiać o jakości i automatyzacji? Napisz do mnie:</span> <a class="underline hover:underline focus:underline" href="mailto:micholesiak@gmail.com">micholesiak@gmail.com</a></p>
+      <section id="contact" aria-labelledby="contact-heading" class="reveal mb-24 rounded-3xl border border-[#c4dacf] bg-white/80 p-6 shadow-soft sm:p-8">
+        <h2 id="contact-heading" class="text-3xl font-bold tracking-tight" data-i18n="contact_h2">Contact</h2>
+        <p class="mt-3 text-[#35534b]" data-i18n="contact_p">
+          If you want to discuss quality engineering, AI-enabled QA, or product delivery, contact me at:
+        </p>
+        <a class="mt-4 inline-flex rounded-full border border-[#bfd7cc] bg-white px-4 py-2 font-semibold hover:bg-fog" href="mailto:micholesiak@gmail.com"
+          >micholesiak@gmail.com</a
+        >
       </section>
     </main>
 
-    <footer class="border-t border-slate-200 bg-white" aria-labelledby="footer-heading">
+    <footer class="border-t border-[#cfdfd7] bg-white/75" aria-labelledby="footer-heading">
       <h2 id="footer-heading" class="sr-only">Footer</h2>
-      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6 lg:px-8">
-        <p class="text-sm text-slate-600">© <span id="year"></span> Michał Olesiak. <span data-i18n="rights">Wszelkie prawa zastrzeżone.</span></p>
-        <ul class="flex items-center gap-4" role="list">
-          <li>
-            <a href="https://www.linkedin.com/in/michal-olesiak/" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm hover:shadow-soft focus:shadow-soft" data-i18n-attr-aria-label="ln_label">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.82-2.2 3.75-2.2 4 0 4.75 2.63 4.75 6v7.99h-4V15.5c0-2 0-4.5-2.75-4.5s-3.25 2.15-3.25 4.37V24h-4V8z"/></svg>
-              <span class="group-hover:underline group-focus:underline">LinkedIn</span>
-            </a>
-          </li>
-        </ul>
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-8 text-sm text-[#35534b] sm:flex-row sm:px-6 lg:px-8">
+        <p>© <span id="year"></span> Michał Olesiak. <span data-i18n="rights">All rights reserved.</span></p>
+        <a
+          href="https://www.linkedin.com/in/michal-olesiak/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-[#bfd7cc] bg-white px-4 py-2 hover:shadow-soft"
+          data-i18n-attr-aria-label="ln_label"
+          aria-label="Open LinkedIn profile"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5">
+            <path
+              fill="currentColor"
+              d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.82-2.2 3.75-2.2 4 0 4.75 2.63 4.75 6v7.99h-4V15.5c0-2 0-4.5-2.75-4.5s-3.25 2.15-3.25 4.37V24h-4V8z"
+            />
+          </svg>
+          <span>LinkedIn</span>
+        </a>
       </div>
     </footer>
 
     <script>
       const i18n = {
-         pl: {
-    skip: 'Przejdź do głównej treści',
-    nav_timeline: 'Oś czasu', nav_tech: 'Tech stack', nav_edu: 'Edukacja', nav_contact: 'Kontakt',
-    hero_h1: 'Podróż przez moją historię zawodową',
-    hero_p: 'Od najnowszych projektów i odpowiedzialności po początki kariery — skupiam się na doświadczeniu zawodowym, jakości i automatyzacji.',
-    timeline_h2: 'Oś czasu (najnowsze → najstarsze)',
-    timeline_pos: 'Pozycja na stronie:',
+        pl: {
+          skip: 'Przejdź do głównej treści',
+          nav_timeline: 'Doświadczenie',
+          nav_projects: 'Projekty',
+          nav_tech: 'Tech stack',
+          nav_contact: 'Kontakt',
 
-    t_today_time: 'Dziś',
-    t_today_h3: 'QA Automation — praktyki i standardy',
-    t_today_p: 'Skaluję automatyzację (Playwright, accessibility, performance), buduję dobre praktyki zespołowe, wdrażam nowe technologie i podejścia.',
+          hero_kicker: 'Michał Olesiak',
+          hero_h1: 'Doświadczony inżynier jakości, który dowozi mierzalny wpływ dzięki proaktywnej odpowiedzialności i automatyzacji wspieranej AI.',
+          hero_p:
+            'W HSBC prowadzę inicjatywy jakościowe w projektach customer-facing i design systemach. W Paily buduję produkt płatności QR dla gastronomii od pomysłu do gotowości pilota.',
+          hero_cta_timeline: 'Doświadczenie',
+          hero_cta_project: 'Paily',
+          hero_cta_contact: 'Kontakt',
+          hero_chip_role: 'Senior Test Automation Engineer',
+          hero_chip_focus: 'Proaktywne przywództwo QA',
+          hero_chip_project: 'Twórca Paily',
 
-    t_hsbc_time: '08.2022 - obecnie',
-    t_hsbc_h3: 'HSBC — QA Automation Engineer',
-    t_hsbc_p: 'Prowadzenie QA, strategie testów i frameworki. Integracyjne i wizualne testy (Playwright), API i wydajność, wsparcie release.',
-    t_hsbc_li1: 'Browser Design Library: integracja + testy wizualne + testy performance + automatyczna regresja accessibility, wzrost pokrycia.',
-    t_hsbc_li2: 'M&S Cards & Loans: 100% automatyzacji dla kart, ~80% dla pożyczek; API (Postman), Java, Cucumber, RestAssured, performance (Gatling/JMeter). ',
-    t_hsbc_ms: 'Odwiedź M&S Bank',
-    t_hsbc_li3: 'HSBC Pay: ścieżki krytyczne, UAT, doradztwo dot. kredytów i architektury.',
-    t_hsbc_li4: 'WCAO: Cucumber, reużywalne kroki, manualne testy API.',
-    t_hsbc_li5: 'Inicjatywy: zarządzanie urządzeniami testowymi, kurs Java + mentoring 14 testerów.',
+          timeline_h2: 'Doświadczenie',
+          timeline_p:
+            'Oś czasu ról, w których budowałem fundamenty automatyzacji, zwiększałem pewność wydań i brałem odpowiedzialność za QA.',
 
-    t_2022fdm_h3: 'FDM Group — Java Developer Trainee',
-    t_2022fdm_p: '8h/dzień szkoleń z inżynierii oprogramowania, projekt zespołowy: wymagania → implementacja → dokumentacja → prezentacja.',
+          timeline_now_time: '03.2026 - obecnie',
+          timeline_now_h3: 'HSBC - Senior Test Automation Engineer',
+          timeline_now_story:
+            'Od 01.03.2026 rozszerzam QA wspierane AI w całym cyklu delivery, od wymagań i dokumentacji po codzienny BAU.',
+          timeline_now_li1:
+            'QA SME w ramach sub-value streamu obejmującego około 15 testerów, wspierający standardy i egzekucję.',
+          timeline_now_li2:
+            'Prezentowałem przypadki użycia AI dla jakości na poziomie MD/C-level; część pomysłów została wdrożona jako inicjatywy delivery.',
+          timeline_now_li3:
+            'W razie potrzeby przejmowałem tymczasowo rolę Product Ownera (okresy 3-4 tygodni) dla zespołu 6 developerów i 2 QA.',
 
-    t_2021_h3: 'AQForm — Technik Laboratorium i Elektronik',
-    t_2021_p: 'Pomiary i testy zgodności (fotometria, EMC, bezpieczeństwo fotobiologiczne). Dbałość o jakość i dokumentację.',
+          timeline_paily_time: '12.2025 - obecnie',
+          timeline_paily_h3: 'Paily / PAILY - własny projekt full-stack',
+          timeline_paily_story:
+            'Projektuję i rozwijam wielotenantową platformę płatności QR dla gastronomii, obecnie w przygotowaniu do pilota z realnym rozpoznaniem potrzeb klientów i rozmowami integracyjnymi.',
+          timeline_paily_li1:
+            'Flow gościa: skan QR, podgląd rachunku live, podział rachunku, napiwek, częściowe/pełne płatności i pobranie PDF.',
+          timeline_paily_li2:
+            'Przygotowanie pilota: rozmowy integracyjne z Tpay i Dotykačka oraz stałe rozmowy z klientami gastronomii.',
+          timeline_paily_li3:
+            'Niezawodność: synchronizacja wielu gości w czasie rzeczywistym, blokowanie pozycji i backend jako źródło prawdy.',
+          timeline_paily_li4:
+            'Praca produktowa poza kodem: rozmowy sprzedażowe, udział w konferencjach i spotkaniach startupowych, przeglądy UX oraz iteracyjne planowanie funkcji.',
 
-    tech_h2: 'Tech stack',
-    edu_h2: 'Edukacja',
-    edu_msc_school: 'AGH — Zarządzanie i Inżynieria Produkcji',
-    edu_msc_desc: 'Magister (ZiIP). Tematy: Zwinne zarządzanie projektami IT, wyzwania i dobre praktyki.',
-    edu_beng_school: 'AGH — studia inżynierskie',
-    edu_beng_desc: 'Inżynier Elektrotechniki, pierwsze doświadczenia techniczne i praca laboratoryjna.',
-    contact_h2: 'Kontakt',
-    contact_p: 'Masz pytania lub chcesz porozmawiać o jakości i automatyzacji? Napisz do mnie:',
-    rights: 'Wszelkie prawa zastrzeżone.',
-    ln_label: 'Otwórz profil Michała na LinkedIn w nowej karcie'
-  },
-  en: {
-    skip: 'Skip to main content',
-    nav_timeline: 'Timeline', nav_tech: 'Tech stack', nav_edu: 'Education', nav_contact: 'Contact',
-    hero_h1: 'A journey through my professional story',
-    hero_p: 'From the latest responsibilities back to the beginning — focused on experience, quality and automation.',
-    timeline_h2: 'Timeline (newest → oldest)',
-    timeline_pos: 'Reading position:',
+          timeline_hsbc_prev_time: '08.2022 - 02.2026',
+          timeline_hsbc_prev_h3: 'HSBC - Test Automation Engineer',
+          timeline_hsbc_prev_story:
+            'Dołączyłem do dojrzałego projektu bez automatyzacji QA i współtworzyłem skalowalne fundamenty jakości dla design systemów, płatności i lendingu.',
+          timeline_hsbc_prev_li1:
+            'Wprowadziłem Playwright i zbudowałem pełny framework testowy dla Design Systemu.',
+          timeline_hsbc_prev_li2:
+            'Wdrożyłem automatyzację wspieraną CI/CD, w tym testy wizualne w pipeline deweloperskim z natychmiastowym feedbackiem.',
+          timeline_hsbc_prev_li3:
+            'Wyniki pokrycia: M&S Cards ok. 90%, M&S Loans ok. 50%, a Design Libraries od 0% do 100% pokrycia wizualnego, 90% funkcjonalnego i 100% accessibility w około 1.5 roku.',
+          timeline_hsbc_prev_li4:
+            "Odpowiadałem za przygotowanie release'ów, QA w trakcie developmentu, codzienną regresję, wsparcie produkcji i testy wydajnościowe dla bankowych ścieżek customer-facing.",
 
-    t_today_time: 'Today',
-    t_today_h3: 'QA Automation — practices & standards',
-    t_today_p: 'Scaling automation (Playwright, accessibility, performance), shaping team practices, and introducing new technologies and approaches.',
+          timeline_fdm_time: '05.2022 - 08.2022',
+          timeline_fdm_h3: 'FDM Group - Java Developer Trainee',
+          timeline_fdm_story: 'Intensywne szkolenie inżynierskie i delivery zespołowy od wymagań do dema.',
 
-    t_hsbc_time: '08.2022 – present',
-    t_hsbc_h3: 'HSBC — QA Automation Engineer',
-    t_hsbc_p: 'Leading QA, test strategies and frameworks. Integration & visual tests (Playwright), API and performance, release support.',
-    t_hsbc_li1: 'Browser Design Library: integration + visual testing + performance tests + automated accessibility regression, coverage growth.',
-    t_hsbc_li2: 'M&S Cards & Loans: 100% automation for cards, ~80% for loans; API (Postman), Java, Cucumber, RestAssured, performance (Gatling/JMeter). ',
-    t_hsbc_ms: 'Visit M&S Bank',
-    t_hsbc_li3: 'HSBC Pay: critical paths, UAT, advisory on credit and architecture.',
-    t_hsbc_li4: 'WCAO: Cucumber, reusable steps, manual API tests.',
-    t_hsbc_li5: 'Initiatives: test devices management, Java basics course + mentoring 14 manual testers.',
+          timeline_aq_time: '04.2021 - 05.2022',
+          timeline_aq_h3: 'AQForm - Technik Laboratorium i Elektronik',
+          timeline_aq_story: 'Precyzja jakości przez testy zgodności, fotometrię i dokumentację techniczną.',
 
-    t_2022fdm_h3: 'FDM Group — Java Developer Trainee',
-    t_2022fdm_p: 'Intensive 8h/day training, team project: requirements → implementation → documentation → presentation.',
+          projects_h2: 'Paily',
+          projects_p:
+            'Produkt płatności QR dla gastronomii, który buduję end-to-end; obecnie w przygotowaniu do pilota z realnymi rozmowami z klientami i pracą integracyjną.',
+          projects_card1_title: 'Checkout gościa',
+          projects_card1_text: 'Flow QR z podglądem rachunku live, split bill, płatnościami częściowymi, napiwkiem i PDF.',
+          projects_card2_title: 'Staff i admin',
+          projects_card2_text:
+            'Portal operacyjny do stolików, menu, billingu, onboardingu i zarządzania tenantami, z równoległymi rozmowami o integracjach pilota.',
+          projects_card3_title: 'Billing i synchronizacja',
+          projects_card3_text: 'Synchronizacja real-time, item locking i backendowa kontrola ceny oraz stanu rozliczenia.',
+          projects_card4_title: 'Testy',
+          projects_card4_text:
+            'Architektura jakości z pokryciem unit, integration, API i E2E oraz testami performance i kontrolami jakości frontendu.',
+          projects_test_h3: 'Testy i jakość',
+          projects_test_li1:
+            'JUnit + Spring Boot integration tests dla logiki domeny, security rules, limitów i przepływów receiptów.',
+          projects_test_li2: 'Playwright API tests dla kontraktów endpointów i coverage flow backendowych.',
+          projects_test_li3: 'Playwright E2E dla ścieżek gościa, staffu i panelu admin.',
+          projects_test_li4:
+            'Testy load i soak z raportami HTML/JSON oraz kontrole jakości SEO/build po stronie frontendu.',
 
-    t_2021_h3: 'AQForm — Lab Technician & Electronics',
-    t_2021_p: 'Compliance and measurement (photometry, EMC, photobiological safety). Quality and documentation focus.',
+          tech_h2: 'Tech stack',
+          tech_p:
+            'Narzędzia, których używam do budowy niezawodnych systemów i przesuwania jakości jak najwcześniej w procesie.',
 
-    tech_h2: 'Tech stack',
-    edu_h2: 'Education',
-    edu_msc_school: 'AGH — Management & Production Engineering',
-    edu_msc_desc: 'M.Sc. (ZiIP). Topics: Agile IT project management, challenges and best practices.',
-    edu_beng_school: 'AGH — B.Eng. studies',
-    edu_beng_desc: 'Electrical Engineering degree, first hands-on technical and lab experience.',
-    contact_h2: 'Contact',
-    contact_p: 'Questions or want to talk quality & automation? Email me at',
-    rights: 'All rights reserved.',
-    ln_label: "Open Michał's LinkedIn profile in a new tab"
-  }
+          edu_h2: 'Edukacja',
+          edu_msc_school: 'AGH - Zarządzanie i Inżynieria Produkcji',
+          edu_msc_desc:
+            'Praktyczny wniosek z pracy magisterskiej: ludzie są kluczowi, szczególnie dziś - krytyczne myślenie, relacje i ownership decydują o trwałym sukcesie projektów.',
+          edu_beng_school: 'AGH - Elektrotechnika',
+          edu_beng_desc: 'Studia inżynierskie z praktyką techniczną i laboratoryjną.',
+
+          contact_h2: 'Kontakt',
+          contact_p: 'Jeśli chcesz porozmawiać o inżynierii jakości, QA wspieranym AI lub dowożeniu produktu, napisz na:',
+          rights: 'Wszelkie prawa zastrzeżone.',
+          ln_label: 'Otwórz profil Michała na LinkedIn w nowej karcie'
+        },
+        en: {
+          skip: 'Skip to main content',
+          nav_timeline: 'Experience',
+          nav_projects: 'Projects',
+          nav_tech: 'Tech stack',
+          nav_contact: 'Contact',
+
+          hero_kicker: 'Michał Olesiak',
+          hero_h1:
+            'Experienced quality engineer creating measurable impact through proactive ownership and AI-powered automation.',
+          hero_p:
+            'At HSBC I lead quality initiatives across customer-facing products and design systems. In Paily I build a QR payments product for restaurants from idea to pilot readiness.',
+          hero_cta_timeline: 'Experience',
+          hero_cta_project: 'Paily',
+          hero_cta_contact: 'Contact',
+          hero_chip_role: 'Senior Test Automation Engineer',
+          hero_chip_focus: 'Proactive QA leadership',
+          hero_chip_project: 'Paily founder and builder',
+
+          timeline_h2: 'Experience',
+          timeline_p:
+            'Timeline of roles where I built automation foundations, improved release confidence, and drove QA ownership.',
+
+          timeline_now_time: '03.2026 - present',
+          timeline_now_h3: 'HSBC - Senior Test Automation Engineer',
+          timeline_now_story:
+            'Since 01.03.2026 I have been expanding AI-supported QA across the delivery lifecycle, from requirements and documentation to day-to-day BAU.',
+          timeline_now_li1:
+            'QA SME within a sub-value stream of around 15 testers, supporting standards and execution.',
+          timeline_now_li2:
+            'Presented AI quality use cases to MD/C-level leadership; selected ideas became delivery initiatives.',
+          timeline_now_li3:
+            'Stepped into interim Product Owner ownership (3-4 week periods) for a team of 6 developers and 2 QAs when needed.',
+
+          timeline_paily_time: '12.2025 - present',
+          timeline_paily_h3: 'Paily / PAILY - Full-stack personal project',
+          timeline_paily_story:
+            'I design and build a multi-tenant QR payments platform for restaurants, currently in pilot preparation with real customer discovery and integration conversations.',
+          timeline_paily_li1:
+            'Guest flow: QR scan, live bill view, split per person, tips, partial/full checkout, PDF receipt export.',
+          timeline_paily_li2:
+            'Pilot preparation: integration discussions with Tpay and Dotykačka plus ongoing conversations with restaurant customers.',
+          timeline_paily_li3:
+            'Core reliability: real-time multi-guest sync, item locking, backend source of truth for prices and settlement states.',
+          timeline_paily_li4:
+            'Product work beyond coding: sales conversations, conference and startup meeting participation, UX reviews, and iterative feature planning.',
+
+          timeline_hsbc_prev_time: '08.2022 - 02.2026',
+          timeline_hsbc_prev_h3: 'HSBC - Test Automation Engineer',
+          timeline_hsbc_prev_story:
+            'Joined a mature project with no QA automation and helped build a scalable QA foundation across design systems, payments, and lending.',
+          timeline_hsbc_prev_li1:
+            'Introduced Playwright and built a full testing framework for the Design System.',
+          timeline_hsbc_prev_li2:
+            'Implemented CI/CD-supported automation, including visual checks in the developer pipeline for immediate feedback.',
+          timeline_hsbc_prev_li3:
+            'Coverage outcomes: M&S Cards around 90%, M&S Loans around 50%, and Design Libraries from 0% to 100% visual, 90% functional, and 100% accessibility coverage in about 1.5 years.',
+          timeline_hsbc_prev_li4:
+            'Owned release preparation, in-development QA, daily regression, production support, and performance testing for customer-facing banking journeys.',
+
+          timeline_fdm_time: '05.2022 - 08.2022',
+          timeline_fdm_h3: 'FDM Group - Java Developer Trainee',
+          timeline_fdm_story: 'Intensive engineering training and team software delivery from requirements to demo.',
+
+          timeline_aq_time: '04.2021 - 05.2022',
+          timeline_aq_h3: 'AQForm - Lab Technician and Electronics',
+          timeline_aq_story: 'Built precision habits through compliance testing, photometry and technical documentation.',
+
+          projects_h2: 'Paily',
+          projects_p:
+            'A restaurant QR payments product I am building end to end, now in pilot preparation with real customer conversations and integration work.',
+          projects_card1_title: 'Guest checkout',
+          projects_card1_text: 'QR flow with live bill view, split bill, partial payments, tips and PDF receipt download.',
+          projects_card2_title: 'Staff and admin',
+          projects_card2_text:
+            'Operational portal for tables, menu, billing, onboarding and tenant management, with pilot integration discussions.',
+          projects_card3_title: 'Billing and sync',
+          projects_card3_text: 'Real-time guest synchronization, item locking, and backend control over price and settlement state.',
+          projects_card4_title: 'Testing',
+          projects_card4_text:
+            'Quality architecture with unit, integration, API and E2E coverage, plus performance and frontend quality checks.',
+          projects_test_h3: 'Testing and quality',
+          projects_test_li1:
+            'JUnit + Spring Boot integration tests for domain logic, security rules, limits and receipt flows.',
+          projects_test_li2: 'Playwright API tests for endpoint contracts and backend flow coverage.',
+          projects_test_li3: 'Playwright E2E flows for guest, staff and admin journeys.',
+          projects_test_li4:
+            'Load and soak suites with HTML/JSON reporting plus frontend SEO/build quality checks.',
+
+          tech_h2: 'Tech stack',
+          tech_p: 'Tools I use to build reliable systems and shift quality as early as possible in delivery.',
+
+          edu_h2: 'Education',
+          edu_msc_school: 'AGH - Management and Production Engineering',
+          edu_msc_desc:
+            "Master's thesis practical outcome: people-first delivery, critical thinking, strong relationships, and ownership are key to sustainable project success.",
+          edu_beng_school: 'AGH - Electrical Engineering',
+          edu_beng_desc: 'Engineering degree with hands-on technical and laboratory experience.',
+
+          contact_h2: 'Contact',
+          contact_p:
+            'If you want to discuss quality engineering, AI-enabled QA, or product delivery, contact me at:',
+          rights: 'All rights reserved.',
+          ln_label: "Open Michał's LinkedIn profile in a new tab"
+        }
       };
 
       const btnPL = document.getElementById('btnPL');
@@ -298,22 +698,44 @@
       const menuToggle = document.getElementById('menuToggle');
       const mobileMenu = document.getElementById('mobileMenu');
 
+      const state = {
+        lang: 'en'
+      };
+
       const setLang = (lang) => {
+        state.lang = lang;
         document.documentElement.lang = lang;
         const dict = i18n[lang];
-        document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = dict[el.getAttribute('data-i18n')]; });
-        document.querySelectorAll('[data-i18n-attr-aria-label]').forEach(el => { const key = el.getAttribute('data-i18n-attr-aria-label'); el.setAttribute('aria-label', dict[key]); });
-        btnPL.setAttribute('aria-pressed', String(lang==='pl'));
-        btnEN.setAttribute('aria-pressed', String(lang==='en'));
+
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key]) el.textContent = dict[key];
+        });
+
+        document.querySelectorAll('[data-i18n-attr-aria-label]').forEach((el) => {
+          const key = el.getAttribute('data-i18n-attr-aria-label');
+          if (dict[key]) el.setAttribute('aria-label', dict[key]);
+        });
+
+        const isPL = lang === 'pl';
+        [btnPL, btnPLm].forEach((btn) => btn && btn.setAttribute('aria-pressed', String(isPL)));
+        [btnEN, btnENm].forEach((btn) => btn && btn.setAttribute('aria-pressed', String(!isPL)));
       };
 
       btnPL.addEventListener('click', () => setLang('pl'));
       btnEN.addEventListener('click', () => setLang('en'));
       if (btnPLm) btnPLm.addEventListener('click', () => setLang('pl'));
       if (btnENm) btnENm.addEventListener('click', () => setLang('en'));
+
       if (menuToggle && mobileMenu) {
-        const closeMenu = () => { mobileMenu.classList.add('hidden'); menuToggle.setAttribute('aria-expanded','false'); };
-        const openMenu  = () => { mobileMenu.classList.remove('hidden'); menuToggle.setAttribute('aria-expanded','true'); };
+        const closeMenu = () => {
+          mobileMenu.classList.add('hidden');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        };
+        const openMenu = () => {
+          mobileMenu.classList.remove('hidden');
+          menuToggle.setAttribute('aria-expanded', 'true');
+        };
         menuToggle.addEventListener('click', () => {
           const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
           isOpen ? closeMenu() : openMenu();
@@ -323,33 +745,40 @@
             if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) closeMenu();
           }
         });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
-        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeMenu();
+        });
+        mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
       }
 
       document.getElementById('year').textContent = new Date().getFullYear();
 
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!prefersReduced) {
-        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('is-visible'); }); }, { threshold: 0.15 });
-        document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-      } else { document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible')); }
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add('is-visible');
+            });
+          },
+          { threshold: 0.16 }
+        );
+        document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+      }
 
       const progressBar = document.getElementById('progressBar');
       const onScroll = () => {
-        const t = window.scrollY, d = document.body.scrollHeight - window.innerHeight; progressBar.style.width = (d>0 ? (t/d)*100 : 0) + '%';
+        const top = window.scrollY;
+        const scrollable = document.body.scrollHeight - window.innerHeight;
+        progressBar.style.width = (scrollable > 0 ? (top / scrollable) * 100 : 0) + '%';
       };
-      document.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+      document.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
 
-      const spyLabel = document.getElementById('spyLabel');
-      const items = [...document.querySelectorAll('#timeline [id^="item-"]')];
-      const spy = new IntersectionObserver((entries) => {
-        const v = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (v) { const id = v.target.id.replace('item-',''); spyLabel.textContent = id === 'today' ? (document.documentElement.lang==='pl' ? 'Dziś' : 'Today') : id; }
-      }, { rootMargin: '-40% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
-      items.forEach((el) => spy.observe(el));
-
-      setLang('en');
+      const initialLang = (navigator.language || '').toLowerCase().startsWith('pl') ? 'pl' : 'en';
+      setLang(initialLang);
     </script>
   </body>
 </html>

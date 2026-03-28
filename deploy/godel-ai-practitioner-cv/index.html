@@ -1,0 +1,1419 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Michał Olesiak | AI Practitioner | Godel Technologies</title>
+    <meta
+      name="description"
+      content="Futuristic English CV tailored for Godel Technologies, focused on AI-enabled SDLC, AI-first delivery, coding agents, quality engineering, and full SDLC ownership."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23060f40'/%3E%3Ccircle cx='50' cy='50' r='28' fill='%2300eeba' fill-opacity='0.18'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='44' fill='%23ffffff' font-family='Arial'%3EM%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy-950: #060f40;
+        --navy-900: #0a1654;
+        --navy-800: #11206c;
+        --navy-700: #183086;
+        --aqua: #00eeba;
+        --aqua-strong: #64ffd7;
+        --ice: #eef4ff;
+        --mist: #a7b7e8;
+        --muted: #93a3d8;
+        --line: rgba(122, 152, 232, 0.18);
+        --panel: rgba(8, 19, 73, 0.76);
+        --panel-strong: rgba(11, 24, 90, 0.92);
+        --glow: 0 0 0 1px rgba(0, 238, 186, 0.12), 0 24px 60px rgba(0, 0, 0, 0.35);
+        --shadow: 0 28px 80px rgba(2, 6, 22, 0.48);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ice);
+        font-family: "Montserrat", sans-serif;
+        background:
+          radial-gradient(circle at 15% 18%, rgba(0, 238, 186, 0.12), transparent 22%),
+          radial-gradient(circle at 82% 12%, rgba(100, 255, 215, 0.1), transparent 20%),
+          radial-gradient(circle at 48% 70%, rgba(24, 48, 134, 0.28), transparent 34%),
+          linear-gradient(180deg, #050b2d 0%, #060f40 34%, #08154d 72%, #050b2d 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -2;
+      }
+
+      body::before {
+        background-image:
+          linear-gradient(rgba(116, 144, 220, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(116, 144, 220, 0.08) 1px, transparent 1px);
+        background-size: 34px 34px;
+        mask-image: radial-gradient(circle at center, black 38%, transparent 100%);
+      }
+
+      body::after {
+        z-index: -1;
+        background:
+          linear-gradient(90deg, transparent 0%, rgba(0, 238, 186, 0.04) 50%, transparent 100%);
+        animation: sweep 14s linear infinite;
+        opacity: 0.5;
+      }
+
+      @keyframes sweep {
+        from {
+          transform: translateX(-40%);
+        }
+        to {
+          transform: translateX(40%);
+        }
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      a,
+      [role="button"] {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .progress-rail {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.06);
+        z-index: 60;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #00eeba 0%, #64ffd7 46%, #ffffff 100%);
+        box-shadow: 0 0 18px rgba(0, 238, 186, 0.45);
+      }
+
+      .shell {
+        width: min(1240px, calc(100% - 28px));
+        margin: 18px auto 64px;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 16px;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px 22px;
+        border: 1px solid rgba(146, 169, 240, 0.18);
+        background: rgba(7, 16, 60, 0.72);
+        backdrop-filter: blur(16px);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .topbar-meta {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .topbar-meta-item {
+        display: flex;
+        flex: 1 1 188px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        min-width: 176px;
+        padding: 11px 14px 12px;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 238, 186, 0.24);
+        background: linear-gradient(180deg, rgba(0, 238, 186, 0.11), rgba(255, 255, 255, 0.045));
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+          0 10px 24px rgba(0, 0, 0, 0.16);
+        color: var(--ice);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        letter-spacing: 0.04em;
+      }
+
+      .topbar-meta-item strong {
+        color: var(--aqua-strong);
+        font-weight: 600;
+        font-size: 0.64rem;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      .topbar-meta-value {
+        font-family: "Montserrat", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        color: #ffffff;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, rgba(0, 238, 186, 0.18), rgba(255, 255, 255, 0.06));
+        border: 1px solid rgba(0, 238, 186, 0.3);
+        box-shadow:
+          inset 0 0 30px rgba(0, 238, 186, 0.08),
+          0 10px 26px rgba(0, 0, 0, 0.18);
+        font-size: 1.02rem;
+        font-weight: 800;
+      }
+
+      .brand-copy strong,
+      .hero h1,
+      .section-title,
+      .module-title,
+      .panel-title,
+      .portal-title,
+      .timeline-title {
+        letter-spacing: -0.04em;
+      }
+
+      .brand-copy {
+        display: grid;
+        gap: 4px;
+      }
+
+      .brand-copy strong {
+        font-size: 1.24rem;
+        line-height: 1;
+      }
+
+      .brand-copy span,
+      .nav a,
+      .eyebrow,
+      .chip,
+      .tag,
+      .data-line,
+      .kpi-value,
+      .cta-meta,
+      .timeline-step,
+      .stack-list strong {
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      .brand-copy span {
+        font-size: 0.78rem;
+        color: var(--aqua-strong);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .nav a {
+        color: var(--muted);
+        font-size: 0.72rem;
+        padding: 8px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        position: relative;
+      }
+
+      .nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 2px;
+        height: 1px;
+        transform: scaleX(0);
+        transform-origin: left;
+        background: linear-gradient(90deg, var(--aqua), transparent);
+        transition: transform 220ms ease;
+      }
+
+      .nav a:hover::after,
+      .nav a:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .hero {
+        position: relative;
+        padding: 44px 38px 34px;
+        margin-top: 24px;
+        border: 1px solid rgba(146, 169, 240, 0.16);
+        border-radius: 34px;
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
+          radial-gradient(circle at top right, rgba(0, 238, 186, 0.13), transparent 26%),
+          radial-gradient(circle at 10% 88%, rgba(100, 255, 215, 0.08), transparent 24%),
+          rgba(8, 19, 73, 0.72);
+        box-shadow: var(--shadow);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(115deg, transparent 0%, transparent 38%, rgba(0, 238, 186, 0.05) 54%, transparent 72%),
+          radial-gradient(circle at center, rgba(255, 255, 255, 0.03), transparent 58%);
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--aqua-strong);
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 34px;
+        height: 1px;
+        background: linear-gradient(90deg, var(--aqua), transparent);
+      }
+
+      .hero-grid {
+        display: block;
+      }
+
+      .hero-copy {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: none;
+      }
+
+      .hero h1 {
+        margin: 16px 0 0;
+        max-width: 1040px;
+        font-size: clamp(3.15rem, 7vw, 6.4rem);
+        line-height: 0.94;
+      }
+
+      .lede {
+        width: 100%;
+        max-width: none;
+        margin-top: 18px;
+        font-size: 1rem;
+        line-height: 1.72;
+        color: var(--mist);
+      }
+
+      .portal-link:hover,
+      .portal-link:focus-visible,
+      .mini-link:hover,
+      .mini-link:focus-visible {
+        transform: translateY(-2px);
+      }
+
+      .tag-row,
+      .portal-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chip,
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+      }
+
+      .hero-panel {
+        position: relative;
+        z-index: 1;
+        margin-top: 26px;
+        padding: 22px;
+        border: 1px solid rgba(146, 169, 240, 0.16);
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(8, 19, 73, 0.76), rgba(6, 15, 64, 0.86));
+        box-shadow: var(--glow);
+      }
+
+      .hero-stack-bundle {
+        margin-top: 18px;
+      }
+
+      .stack-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .panel-title {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      .panel-copy {
+        margin: 10px 0 0;
+        color: var(--mist);
+        line-height: 1.65;
+        font-size: 0.96rem;
+      }
+
+      .stack-list {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .stack-item {
+        padding: 14px 14px 14px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(146, 169, 240, 0.14);
+      }
+
+      .stack-item strong {
+        display: block;
+        color: var(--aqua-strong);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .stack-item span {
+        display: block;
+        margin-top: 8px;
+        color: var(--ice);
+        line-height: 1.6;
+        font-size: 0.94rem;
+      }
+
+      .career-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+        color: var(--aqua-strong);
+        font-size: 0.76rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .career-role {
+        color: var(--ice);
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1.42fr 0.92fr;
+        gap: 24px;
+        margin-top: 24px;
+      }
+
+      .main-stack,
+      .side-stack {
+        display: grid;
+        gap: 24px;
+        align-content: start;
+      }
+
+      .module {
+        position: relative;
+        overflow: hidden;
+        padding: 28px;
+        border: 1px solid rgba(146, 169, 240, 0.16);
+        border-radius: 30px;
+        background: linear-gradient(180deg, rgba(9, 20, 76, 0.84), rgba(6, 15, 64, 0.88));
+        box-shadow: var(--shadow);
+      }
+
+      .module::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), transparent 46%);
+        pointer-events: none;
+      }
+
+      .module-header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .module-title {
+        margin-top: 12px;
+        font-size: clamp(1.5rem, 2.3vw, 2.2rem);
+      }
+
+      .module-subtitle {
+        max-width: 520px;
+        margin: 10px 0 0;
+        color: var(--mist);
+        line-height: 1.6;
+      }
+
+      .grid-three,
+      .grid-two,
+      .proof-grid,
+      .agent-grid,
+      .portal-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .grid-three,
+      .proof-grid,
+      .agent-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .grid-two,
+      .portal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card,
+      .timeline-card,
+      .proof-card,
+      .agent-card,
+      .info-card,
+      .portal-card,
+      .contact-card,
+      .story-card {
+        position: relative;
+        padding: 20px;
+        border-radius: 24px;
+        border: 1px solid rgba(146, 169, 240, 0.14);
+        background: rgba(255, 255, 255, 0.045);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+      }
+
+      .card h3,
+      .timeline-card h3,
+      .proof-card h3,
+      .agent-card h3,
+      .portal-title,
+      .info-card h3,
+      .story-card h3 {
+        margin: 0;
+        font-size: 1.08rem;
+      }
+
+      .card p,
+      .timeline-card p,
+      .proof-card p,
+      .agent-card p,
+      .portal-card p,
+      .info-card p,
+      .story-card p,
+      .list,
+      .data-copy,
+      .footer-note {
+        color: var(--mist);
+        line-height: 1.7;
+      }
+
+      .card p,
+      .timeline-card p,
+      .proof-card p,
+      .agent-card p,
+      .portal-card p,
+      .info-card p,
+      .story-card p {
+        margin: 12px 0 0;
+      }
+
+      .list {
+        margin: 14px 0 0;
+        padding-left: 18px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .timeline {
+        position: relative;
+        display: grid;
+        gap: 18px;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 18px;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(180deg, rgba(0, 238, 186, 0.8), rgba(146, 169, 240, 0.08));
+      }
+
+      .timeline-card {
+        margin-left: 38px;
+      }
+
+      .timeline-card::before {
+        content: "";
+        position: absolute;
+        left: -28px;
+        top: 24px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--aqua) 0%, #00a785 65%, rgba(0, 238, 186, 0.12) 100%);
+        box-shadow: 0 0 18px rgba(0, 238, 186, 0.6);
+      }
+
+      .timeline-step {
+        color: var(--aqua-strong);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .timeline-title {
+        margin-top: 10px;
+        font-size: 1.2rem;
+      }
+
+      .tag {
+        color: var(--ice);
+        border: 1px solid rgba(0, 238, 186, 0.2);
+        background: rgba(0, 238, 186, 0.08);
+      }
+
+      .tag-row {
+        margin-top: 16px;
+      }
+
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .kpi {
+        padding: 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(146, 169, 240, 0.14);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .kpi-value {
+        color: var(--aqua-strong);
+        font-size: 1.35rem;
+        letter-spacing: 0.06em;
+      }
+
+      .kpi-label {
+        display: block;
+        margin-top: 12px;
+        color: var(--mist);
+        line-height: 1.55;
+        font-size: 0.92rem;
+      }
+
+      .story-card {
+        padding: 22px;
+      }
+
+      .story-card strong {
+        color: var(--aqua-strong);
+      }
+
+      .story-card .list {
+        margin-top: 16px;
+      }
+
+      .agent-card::after,
+      .portal-card::after,
+      .proof-card::after {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(0, 238, 186, 0.38), transparent 44%, rgba(255, 255, 255, 0.08) 100%);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+
+      .portal-card {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background:
+          radial-gradient(circle at top right, rgba(0, 238, 186, 0.12), transparent 28%),
+          rgba(255, 255, 255, 0.045);
+      }
+
+      .portal-icon,
+      .proof-icon,
+      .agent-icon,
+      .info-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+        background: linear-gradient(135deg, rgba(0, 238, 186, 0.22), rgba(255, 255, 255, 0.04));
+        border: 1px solid rgba(0, 238, 186, 0.2);
+        box-shadow: inset 0 0 24px rgba(0, 238, 186, 0.1);
+      }
+
+      .portal-link,
+      .mini-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 18px;
+        font-weight: 700;
+      }
+
+      .portal-link {
+        color: var(--aqua-strong);
+      }
+
+      .mini-link {
+        color: var(--ice);
+      }
+
+      .cta-meta {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 16px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border: 1px solid rgba(146, 169, 240, 0.14);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .data-lines {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .stack-bundle {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+        mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+      }
+
+      .stack-lane {
+        overflow: hidden;
+        border-radius: 18px;
+        border: 1px solid rgba(146, 169, 240, 0.14);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .stack-track {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 10px;
+        min-width: max-content;
+        will-change: transform;
+      }
+
+      .stack-track.left {
+        animation: marquee-left 64s linear infinite;
+      }
+
+      .stack-track.right {
+        animation: marquee-right 28s linear infinite;
+      }
+
+      .stack-pill {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        letter-spacing: 0.04em;
+        color: var(--ice);
+        border: 1px solid rgba(0, 238, 186, 0.16);
+        background: rgba(0, 238, 186, 0.08);
+        white-space: nowrap;
+      }
+
+      .stack-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 999px;
+        padding: 10px 14px;
+        border: 1px solid rgba(0, 238, 186, 0.18);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--ice);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .stack-toggle[aria-pressed="true"] {
+        background: rgba(0, 238, 186, 0.12);
+        border-color: rgba(0, 238, 186, 0.34);
+      }
+
+      .stack-toggle:hover,
+      .stack-toggle:focus-visible {
+        transform: translateY(-1px);
+      }
+
+      .stack-bundle.static-view {
+        mask-image: none;
+      }
+
+      .stack-bundle.static-view .stack-track {
+        min-width: 100%;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        animation: none !important;
+        transform: none !important;
+      }
+
+      .stack-bundle.static-view .duplicate {
+        display: none;
+      }
+
+      @keyframes marquee-left {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      @keyframes marquee-right {
+        from {
+          transform: translateX(-50%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      .data-line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.04);
+        font-size: 0.76rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .data-line span:last-child {
+        color: var(--aqua-strong);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 700ms ease, transform 700ms ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--aqua);
+        outline-offset: 4px;
+      }
+
+      @media (max-width: 1080px) {
+        .content-grid,
+        .grid-three,
+        .proof-grid,
+        .agent-grid,
+        .grid-two,
+        .portal-grid,
+        .kpi-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stack-list {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 840px) {
+        .topbar {
+          position: static;
+          flex-direction: column;
+          align-items: start;
+        }
+
+        .topbar-meta {
+          width: 100%;
+          justify-content: flex-start;
+        }
+
+        .nav {
+          row-gap: 6px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .shell {
+          width: min(100% - 16px, 1240px);
+          margin: 8px auto 28px;
+        }
+
+        .hero,
+        .module,
+        .topbar {
+          border-radius: 24px;
+          padding: 22px;
+        }
+
+        .hero {
+          padding-top: 28px;
+        }
+
+        .hero h1 {
+          font-size: clamp(2.25rem, 12vw, 3.6rem);
+        }
+
+        .button,
+        .button-ghost {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .stack-list {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline-card {
+          margin-left: 28px;
+        }
+
+        .timeline::before {
+          left: 10px;
+        }
+
+        .timeline-card::before {
+          left: -22px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        body::after,
+        .reveal,
+        .portal-link,
+        .mini-link,
+        .stack-track.left,
+        .stack-track.right {
+          animation: none !important;
+          transition: none !important;
+          transform: none !important;
+        }
+      }
+
+      @media print {
+        body {
+          background: #ffffff;
+          color: #111111;
+        }
+
+        body::before,
+        body::after,
+        .progress-rail,
+        .topbar {
+          display: none !important;
+        }
+
+        .shell {
+          width: 100%;
+          margin: 0;
+        }
+
+        .hero,
+        .module,
+        .card,
+        .timeline-card,
+        .proof-card,
+        .portal-card,
+        .agent-card,
+        .story-card,
+        .info-card {
+          color: #111111;
+          background: #ffffff;
+          box-shadow: none;
+          break-inside: avoid;
+        }
+
+        .lede,
+        .card p,
+        .timeline-card p,
+        .proof-card p,
+        .portal-card p,
+        .agent-card p,
+        .list,
+        .module-subtitle,
+        .kpi-label,
+        .footer-note {
+          color: #333333;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress-rail" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+    <main class="shell">
+      <nav class="topbar reveal" aria-label="Primary">
+        <a class="brand clickable" href="#mission" data-cursor="burst" aria-label="Go to mission section">
+          <span class="brand-mark">MO</span>
+          <span class="brand-copy">
+            <strong>Michał Olesiak</strong>
+            <span>AI Practitioner for Godel</span>
+          </span>
+        </a>
+
+        <div class="topbar-meta" aria-label="Contact details">
+          <span class="topbar-meta-item">
+            <strong>Location</strong>
+            <span class="topbar-meta-value">Kraków</span>
+          </span>
+          <a class="topbar-meta-item clickable" href="tel:+48882145360" aria-label="Call +48 882 145 360">
+            <strong>Phone</strong>
+            <span class="topbar-meta-value">+48 882 145 360</span>
+          </a>
+          <a class="topbar-meta-item clickable" href="mailto:micholesiak@gmail.com" aria-label="Email micholesiak@gmail.com">
+            <strong>Email</strong>
+            <span class="topbar-meta-value">micholesiak@gmail.com</span>
+          </a>
+        </div>
+
+        <div class="nav">
+          <a class="clickable" href="#mission" data-cursor="burst">Mission</a>
+          <a class="clickable" href="#sdlc" data-cursor="burst">SDLC</a>
+          <a class="clickable" href="#portals" data-cursor="burst">Portals</a>
+        </div>
+      </nav>
+
+      <section class="hero reveal" id="mission">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">Tailored for Godel Technologies | AI-Enabled SDLC | AI-First</div>
+            <h1>AI-first delivery across the full SDLC.</h1>
+            <p class="lede">
+              I work AI-first and hands-on. I use multiple coding agents across planning, coding,
+              review, testing, and refinement. At HSBC I covered greenfield work, framework setup,
+              and multi-market rollout. Since December I have also been building Paily after hours as
+              a full-stack product in a strongly agent-driven workflow.
+            </p>
+          </div>
+
+          <aside class="hero-panel reveal">
+            <h2 class="panel-title">Mission Control</h2>
+            <div class="stack-list">
+              <div class="stack-item">
+                <strong>Operating model</strong>
+                <span>AI-first, human-reviewed, quality-sensitive delivery.</span>
+              </div>
+              <div class="stack-item">
+                <strong>Primary agents in use</strong>
+                <span>Claude Code, GPT Codex, GitHub Copilot, Amazon Q Developer, SuperWhisper, Manus, Cursor.</span>
+              </div>
+              <div class="stack-item">
+                <strong>Where I apply AI</strong>
+                <span>Planning, coding, review, white-box testing, design direction, market fit, and content workflows.</span>
+              </div>
+              <div class="stack-item">
+                <strong>Why Godel fit matters</strong>
+                <span>My thesis and delivery path both point toward full SDLC transformation.</span>
+              </div>
+            </div>
+          </aside>
+
+          <div class="hero-stack-bundle reveal">
+            <div class="stack-header">
+              <div class="eyebrow">AI and engineering stack</div>
+              <button class="stack-toggle clickable" id="stackToggle" type="button" aria-pressed="false">
+                Stop Animation
+              </button>
+            </div>
+            <div class="stack-bundle" id="stackBundle" aria-label="AI and engineering stack">
+              <div class="stack-lane">
+                <div class="stack-track left">
+                  <span class="stack-pill">Claude Code</span>
+                  <span class="stack-pill">GPT Codex</span>
+                  <span class="stack-pill">GitHub Copilot</span>
+                  <span class="stack-pill">Amazon Q Developer</span>
+                  <span class="stack-pill">SuperWhisper</span>
+                  <span class="stack-pill">Manus</span>
+                  <span class="stack-pill">CI/CD</span>
+                  <span class="stack-pill">Figma</span>
+                  <span class="stack-pill">TypeScript</span>
+                  <span class="stack-pill">Playwright</span>
+                  <span class="stack-pill">Java</span>
+                  <span class="stack-pill">Spring Boot</span>
+                  <span class="stack-pill">React</span>
+                  <span class="stack-pill">Cucumber</span>
+                  <span class="stack-pill">RestAssured</span>
+                  <span class="stack-pill">GitHub Actions</span>
+                  <span class="stack-pill">Docker</span>
+                  <span class="stack-pill">Kubernetes</span>
+                  <span class="stack-pill">Cursor</span>
+                  <span class="stack-pill duplicate">Claude Code</span>
+                  <span class="stack-pill duplicate">GPT Codex</span>
+                  <span class="stack-pill duplicate">GitHub Copilot</span>
+                  <span class="stack-pill duplicate">Amazon Q Developer</span>
+                  <span class="stack-pill duplicate">SuperWhisper</span>
+                  <span class="stack-pill duplicate">Manus</span>
+                  <span class="stack-pill duplicate">CI/CD</span>
+                  <span class="stack-pill duplicate">Figma</span>
+                  <span class="stack-pill duplicate">TypeScript</span>
+                  <span class="stack-pill duplicate">Playwright</span>
+                  <span class="stack-pill duplicate">Java</span>
+                  <span class="stack-pill duplicate">Spring Boot</span>
+                  <span class="stack-pill duplicate">React</span>
+                  <span class="stack-pill duplicate">Cucumber</span>
+                  <span class="stack-pill duplicate">RestAssured</span>
+                  <span class="stack-pill duplicate">GitHub Actions</span>
+                  <span class="stack-pill duplicate">Docker</span>
+                  <span class="stack-pill duplicate">Kubernetes</span>
+                  <span class="stack-pill duplicate">Cursor</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <div class="main-stack">
+          <section class="module reveal" id="sdlc">
+            <div class="module-header">
+              <div>
+                <div class="eyebrow">Career + SDLC</div>
+                <h2 class="module-title">Career across the lifecycle</h2>
+                <p class="module-subtitle">
+                  Roles, dates, and how each stage shaped the way I deliver.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline">
+              <article class="timeline-card">
+                <div class="timeline-step">03.2026 - Present</div>
+                <h3 class="timeline-title">HSBC</h3>
+                <div class="career-meta">
+                  <span class="career-role">Senior Test Automation Engineer</span>
+                </div>
+                <p>
+                  Working in the team that builds the brand design system, I expanded AI-supported QA
+                  across requirements, documentation, manual testing, automation, and BAU. This is
+                  where I most clearly operate across the lifecycle rather than only in the testing
+                  slice.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">AI-supported QA</span>
+                  <span class="tag">Brand design system</span>
+                  <span class="tag">Requirements to BAU</span>
+                  <span class="tag">Lifecycle coverage</span>
+                </div>
+              </article>
+
+              <article class="timeline-card">
+                <div class="timeline-step">12.2025 - Present</div>
+                <h3 class="timeline-title">Paily</h3>
+                <div class="career-meta">
+                  <span class="career-role">Founder / Builder</span>
+                </div>
+                <p>
+                  Building a full-stack product after hours in a strongly agent-driven workflow, using AI
+                  for coding, refinement, planning, market fit, and lead finding.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">Full-stack product</span>
+                  <span class="tag">Agent-driven workflow</span>
+                  <span class="tag">Market fit + leads</span>
+                </div>
+              </article>
+
+              <article class="timeline-card">
+                <div class="timeline-step">08.2022 - 02.2026</div>
+                <h3 class="timeline-title">HSBC</h3>
+                <div class="career-meta">
+                  <span class="career-role">Test Automation Engineer</span>
+                </div>
+                <p>
+                  Built design library automation from the ground up, worked on framework setup for a new
+                  brand page, and helped deliver M&amp;S Cards and M&amp;S Loans safely into more markets,
+                  including requirements definition.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">Greenfield automation</span>
+                  <span class="tag">Framework setup</span>
+                  <span class="tag">M&amp;S Cards + Loans</span>
+                  <span class="tag">Requirements definition</span>
+                </div>
+              </article>
+
+              <article class="timeline-card">
+                <div class="timeline-step">05.2022 - 08.2022</div>
+                <h3 class="timeline-title">FDM Group</h3>
+                <div class="career-meta">
+                  <span class="career-role">Java Developer Trainee</span>
+                </div>
+                <p>
+                  Built a delivery foundation from requirements to demo and strengthened engineering
+                  thinking before moving deeper into software quality and automation.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">Java</span>
+                  <span class="tag">Requirements to demo</span>
+                  <span class="tag">Delivery basics</span>
+                </div>
+              </article>
+
+              <article class="timeline-card">
+                <div class="timeline-step">04.2021 - 05.2022</div>
+                <h3 class="timeline-title">AQForm</h3>
+                <div class="career-meta">
+                  <span class="career-role">Lab Technician and Electronics</span>
+                </div>
+                <p>
+                  Built discipline in measurement, compliance, documentation, and precision, which still
+                  shapes how I approach engineering quality work today.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">Precision</span>
+                  <span class="tag">Documentation</span>
+                  <span class="tag">Quality discipline</span>
+                </div>
+              </article>
+            </div>
+
+            <article class="story-card" style="margin-top: 18px;">
+              <h3>Parallel track: AI-supported audience building</h3>
+              <p>
+                I use AI in my LinkedIn workflow to build technical visibility and grow the audience,
+                which helped bring the profile to around 2.5k followers.
+              </p>
+            </article>
+          </section>
+
+          <section class="module reveal" id="portals">
+            <div class="module-header">
+              <div>
+                <div class="eyebrow">Portals</div>
+                <h2 class="module-title">Open the proof points that matter</h2>
+                <p class="module-subtitle">
+                  Paily and LinkedIn are part of the story, not loose links.
+                </p>
+              </div>
+            </div>
+
+            <div class="portal-grid">
+              <article class="portal-card">
+                <div>
+                  <div class="portal-icon" aria-hidden="true">P</div>
+                  <h3 class="portal-title">Paily</h3>
+                  <p>
+                    My end-to-end full-stack product laboratory, built in a strongly AI-supported workflow
+                    for coding, refinement, planning, market-fit exploration, and lead discovery.
+                  </p>
+                  <div class="portal-tags" style="margin-top: 16px;">
+                    <span class="tag">Product thinking</span>
+                    <span class="tag">Full-stack build</span>
+                    <span class="tag">Engineering depth</span>
+                    <span class="tag">Real-world validation</span>
+                  </div>
+                  <span class="cta-meta">Founder / Builder</span>
+                </div>
+                <a class="portal-link clickable" href="https://paily.pl" target="_blank" rel="noopener noreferrer" data-cursor="burst">
+                  <span>Open the Paily journey</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </article>
+
+              <article class="portal-card">
+                <div>
+                  <div class="portal-icon" aria-hidden="true">in</div>
+                  <h3 class="portal-title">LinkedIn</h3>
+                  <p>
+                    I use AI to support my LinkedIn workflow and grow technical visibility around my work,
+                    with the audience now around 2.5k followers.
+                  </p>
+                  <div class="portal-tags" style="margin-top: 16px;">
+                    <span class="tag">Career timeline</span>
+                    <span class="tag">AI-supported content workflow</span>
+                    <span class="tag">2.5k+ followers</span>
+                  </div>
+                  <span class="cta-meta">Live profile</span>
+                </div>
+                <a class="portal-link clickable" href="https://www.linkedin.com/in/michal-olesiak/" target="_blank" rel="noopener noreferrer" data-cursor="burst">
+                  <span>Open LinkedIn profile</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <aside class="side-stack">
+          <section class="module reveal">
+            <div class="eyebrow">Current Focus</div>
+            <h2 class="module-title">AI-first delivery profile</h2>
+            <div class="data-lines">
+              <div class="data-line"><span>Primary domain</span><span>Quality + AI-enabled delivery</span></div>
+              <div class="data-line"><span>Mindset</span><span>Full SDLC</span></div>
+              <div class="data-line"><span>Strength</span><span>Multiple coding agents hands-on</span></div>
+              <div class="data-line"><span>Environment</span><span>Regulated + product contexts</span></div>
+              <div class="data-line"><span>Cloud familiarity</span><span>Docker / Kubernetes</span></div>
+            </div>
+          </section>
+
+          <section class="module reveal">
+            <div class="eyebrow">Learning</div>
+            <h2 class="module-title">Education and development</h2>
+            <article class="story-card">
+              <h3>Umiejętności jutra 2.0</h3>
+              <p>Completed Google + SGH program focused on practical AI and automation usage.</p>
+            </article>
+            <article class="story-card" style="margin-top: 14px;">
+              <h3>AGH University</h3>
+              <p>Master's degree in Management and Production Engineering, 2023 - 2025.</p>
+              <p>
+                My thesis strengthened my conviction that sustainable delivery depends on full lifecycle
+                thinking, ownership, critical reasoning, and people who can make technology work in reality.
+              </p>
+            </article>
+            <article class="story-card" style="margin-top: 14px;">
+              <h3>Languages</h3>
+              <p>Polish native, English B2.</p>
+            </article>
+          </section>
+
+          <section class="module reveal">
+            <div class="eyebrow">Contact</div>
+            <h2 class="module-title">Start the conversation</h2>
+            <article class="contact-card">
+              <h3>Email</h3>
+              <p>Best direct path for application follow-up or technical conversation. Clicking opens a new message in the default mail app.</p>
+              <a class="mini-link clickable" href="mailto:micholesiak@gmail.com?subject=Application%20follow-up" data-cursor="burst" aria-label="Send an email to micholesiak@gmail.com">
+                <span>Email micholesiak@gmail.com</span>
+              </a>
+            </article>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <script>
+      const progressBar = document.getElementById("progressBar");
+      const revealNodes = document.querySelectorAll(".reveal");
+      const stackToggle = document.getElementById("stackToggle");
+      const stackBundle = document.getElementById("stackBundle");
+
+      function updateProgress() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progressBar.style.width = `${progress}%`;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      revealNodes.forEach((node) => observer.observe(node));
+      updateProgress();
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      window.addEventListener("resize", updateProgress);
+
+      if (stackToggle && stackBundle) {
+        stackToggle.addEventListener("click", () => {
+          const isStatic = stackBundle.classList.toggle("static-view");
+          stackToggle.setAttribute("aria-pressed", String(isStatic));
+          stackToggle.textContent = isStatic ? "Start Animation" : "Stop Animation";
+        });
+      }
+    </script>
+  </body>
+</html>

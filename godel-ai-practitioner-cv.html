@@ -727,6 +727,32 @@
         margin-top: 16px;
       }
 
+      .education-block {
+        display: grid;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .education-block + .education-block {
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(146, 169, 240, 0.14);
+      }
+
+      .education-meta {
+        color: var(--aqua-strong);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .education-degree {
+        margin: 0;
+        color: var(--ice);
+        font-weight: 600;
+      }
+
       .side-stack .story-card h3 {
         position: relative;
         padding-left: 14px;
@@ -1384,11 +1410,23 @@
             </article>
             <article class="story-card" style="margin-top: 14px;">
               <h3>AGH University</h3>
-              <p>Master's degree in Management and Production Engineering, 2023 - 2025.</p>
-              <p>
-                My thesis strengthened my conviction that sustainable delivery depends on full lifecycle
-                thinking, ownership, critical reasoning, and people who can make technology work in reality.
-              </p>
+              <div class="education-block">
+                <div class="education-meta">2023 - 2025</div>
+                <p class="education-degree">Master's degree in Management and Production Engineering</p>
+                <p>
+                  My thesis strengthened my conviction that sustainable delivery depends on full
+                  lifecycle thinking, ownership, critical reasoning, and people who can make technology
+                  work in reality.
+                </p>
+              </div>
+              <div class="education-block">
+                <div class="education-meta">Sep 2018 - Jan 2022</div>
+                <p class="education-degree">Bachelor of Electrical Engineering</p>
+                <p>
+                  AGH University of Science and Technology, Kraków. Participated in the students'
+                  research group "Piorun".
+                </p>
+              </div>
             </article>
             <article class="story-card" style="margin-top: 14px;">
               <h3>Languages</h3>

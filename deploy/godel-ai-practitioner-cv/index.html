@@ -511,6 +511,10 @@
         margin-top: 24px;
       }
 
+      #education {
+        margin-top: 24px;
+      }
+
       .main-stack,
       .side-stack {
         display: grid;
@@ -574,6 +578,16 @@
       .grid-two,
       .portal-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .education-layout {
+        grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+        align-items: start;
+      }
+
+      .education-column {
+        display: grid;
+        gap: 14px;
       }
 
       .card,
@@ -753,14 +767,16 @@
         font-weight: 600;
       }
 
-      .side-stack .story-card h3 {
+      .side-stack .story-card h3,
+      .education-layout .story-card h3 {
         position: relative;
         padding-left: 14px;
         color: rgba(232, 255, 249, 0.98);
         text-shadow: 0 0 18px rgba(100, 255, 215, 0.08);
       }
 
-      .side-stack .story-card h3::before {
+      .side-stack .story-card h3::before,
+      .education-layout .story-card h3::before {
         content: "";
         position: absolute;
         left: 0;
@@ -994,6 +1010,7 @@
         .proof-grid,
         .agent-grid,
         .grid-two,
+        .education-layout,
         .portal-grid,
         .kpi-grid {
           grid-template-columns: 1fr;
@@ -1128,13 +1145,15 @@
           color: #333333;
         }
 
-        .side-stack .story-card h3 {
+        .side-stack .story-card h3,
+        .education-layout .story-card h3 {
           padding-left: 0;
           color: #111111;
           text-shadow: none;
         }
 
-        .side-stack .story-card h3::before {
+        .side-stack .story-card h3::before,
+        .education-layout .story-card h3::before {
           display: none;
         }
 
@@ -1401,14 +1420,24 @@
             </div>
           </section>
 
-          <section class="module reveal">
+        </aside>
+      </div>
+
+      <section class="module reveal" id="education">
+        <div class="module-header">
+          <div>
             <div class="eyebrow">Learning</div>
             <h2 class="module-title">Education and development</h2>
+          </div>
+        </div>
+
+        <div class="grid-two education-layout">
+          <div class="education-column">
             <article class="story-card">
               <h3>Umiejętności jutra 2.0</h3>
               <p>Completed Google + SGH program focused on practical AI and automation usage.</p>
             </article>
-            <article class="story-card" style="margin-top: 14px;">
+            <article class="story-card">
               <h3>AGH University</h3>
               <div class="education-block">
                 <div class="education-meta">2023 - 2025</div>
@@ -1428,11 +1457,14 @@
                 </p>
               </div>
             </article>
-            <article class="story-card" style="margin-top: 14px;">
+          </div>
+
+          <div class="education-column">
+            <article class="story-card">
               <h3>Languages</h3>
               <p>Polish native, English B2.</p>
             </article>
-            <article class="story-card" style="margin-top: 14px;">
+            <article class="story-card">
               <h3>Additional initiatives</h3>
               <ul class="list">
                 <li>
@@ -1450,10 +1482,9 @@
                 </li>
               </ul>
             </article>
-          </section>
-
-        </aside>
-      </div>
+          </div>
+        </div>
+      </section>
 
       <section class="module reveal" id="portals">
         <div class="module-header">

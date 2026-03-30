@@ -515,6 +515,10 @@
         margin-top: 24px;
       }
 
+      #initiatives {
+        margin-top: 24px;
+      }
+
       .main-stack,
       .side-stack {
         display: grid;
@@ -578,16 +582,6 @@
       .grid-two,
       .portal-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .education-layout {
-        grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-        align-items: start;
-      }
-
-      .education-column {
-        display: grid;
-        gap: 14px;
       }
 
       .card,
@@ -768,7 +762,7 @@
       }
 
       .side-stack .story-card h3,
-      .education-layout .story-card h3 {
+      #initiatives .story-card h3 {
         position: relative;
         padding-left: 14px;
         color: rgba(232, 255, 249, 0.98);
@@ -776,7 +770,7 @@
       }
 
       .side-stack .story-card h3::before,
-      .education-layout .story-card h3::before {
+      #initiatives .story-card h3::before {
         content: "";
         position: absolute;
         left: 0;
@@ -1010,7 +1004,6 @@
         .proof-grid,
         .agent-grid,
         .grid-two,
-        .education-layout,
         .portal-grid,
         .kpi-grid {
           grid-template-columns: 1fr;
@@ -1146,14 +1139,14 @@
         }
 
         .side-stack .story-card h3,
-        .education-layout .story-card h3 {
+        #initiatives .story-card h3 {
           padding-left: 0;
           color: #111111;
           text-shadow: none;
         }
 
         .side-stack .story-card h3::before,
-        .education-layout .story-card h3::before {
+        #initiatives .story-card h3::before {
           display: none;
         }
 
@@ -1420,23 +1413,9 @@
             </div>
           </section>
 
-        </aside>
-      </div>
-
-      <section class="module reveal" id="education">
-        <div class="module-header">
-          <div>
+          <section class="module reveal" id="education">
             <div class="eyebrow">Learning</div>
             <h2 class="module-title">Education and development</h2>
-          </div>
-        </div>
-
-        <div class="grid-two education-layout">
-          <div class="education-column">
-            <article class="story-card">
-              <h3>Umiejętności jutra 2.0</h3>
-              <p>Completed Google + SGH program focused on practical AI and automation usage.</p>
-            </article>
             <article class="story-card">
               <h3>AGH University</h3>
               <div class="education-block">
@@ -1457,43 +1436,27 @@
                 </p>
               </div>
             </article>
-          </div>
-
-          <div class="education-column">
-            <article class="story-card">
-              <h3>Languages</h3>
-              <p>Polish native, English B2.</p>
+            <article class="story-card" style="margin-top: 14px;">
+              <h3>Umiejętności jutra 2.0</h3>
+              <p>Completed Google + SGH program focused on practical AI and automation usage.</p>
             </article>
-            <article class="story-card">
-              <h3>Additional initiatives</h3>
+            <article class="story-card" style="margin-top: 14px;">
+              <h3>Languages</h3>
               <ul class="list">
-                <li>
-                  Designed and led an internal Java training program for 14 manual testers across most
-                  of 2024, preparing the sessions independently and running the upskilling track
-                  end-to-end.
-                </li>
-                <li>
-                  Delivered global HSBC knowledge-sharing sessions on AI-supported automation, focused on
-                  practical ways to use AI in quality and automation work.
-                </li>
-                <li>
-                  I use AI in my LinkedIn workflow to build technical visibility and grow the audience,
-                  which helped bring the profile to around 2.5k followers.
-                </li>
+                <li>Polish: native</li>
+                <li>English: B2, used daily while working in international teams for 4 years.</li>
               </ul>
             </article>
-          </div>
-        </div>
-      </section>
+          </section>
+
+        </aside>
+      </div>
 
       <section class="module reveal" id="portals">
         <div class="module-header">
           <div>
             <div class="eyebrow">Portals</div>
             <h2 class="module-title">Open the proof points that matter</h2>
-            <p class="module-subtitle">
-              Paily and LinkedIn are part of the story, not loose links.
-            </p>
           </div>
         </div>
 
@@ -1541,6 +1504,32 @@
             </a>
           </article>
         </div>
+      </section>
+
+      <section class="module reveal" id="initiatives">
+        <div class="module-header">
+          <div>
+            <div class="eyebrow">Initiatives</div>
+            <h2 class="module-title">Additional initiatives</h2>
+          </div>
+        </div>
+
+        <article class="story-card">
+          <ul class="list">
+            <li>
+              Designed and led an internal Java training program for 14 manual testers across most of
+              2024, preparing the sessions independently and running the upskilling track end-to-end.
+            </li>
+            <li>
+              Delivered global HSBC knowledge-sharing sessions on AI-supported automation, focused on
+              practical ways to use AI in quality and automation work.
+            </li>
+            <li>
+              I use AI in my LinkedIn workflow to build technical visibility and grow the audience,
+              which helped bring the profile to around 2.5k followers.
+            </li>
+          </ul>
+        </article>
       </section>
     </main>
 

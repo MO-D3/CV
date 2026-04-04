@@ -1,13 +1,16 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Vercel deploy target', () => {
-  test('serves the Godel entrypoint with a compact greeting button in the topbar', async ({ page }) => {
+  test('serves the AI engineer entrypoint with a compact greeting button in the topbar', async ({ page }) => {
     await page.goto('/deploy/godel-ai-practitioner-cv/');
 
-    await expect(page).toHaveTitle(/Godel Technologies/);
-    await expect(page.getByText('AI Practitioner for Godel')).toBeVisible();
+    await expect(page).toHaveTitle(/AI Engineer/);
+    await expect(page.getByText('AI Engineer | Quality + Reliability')).toBeVisible();
     await expect(
-      page.getByRole('heading', { level: 1, name: 'AI-first delivery across the full SDLC.' })
+      page.getByRole('heading', {
+        level: 1,
+        name: 'AI engineer for reliable delivery.',
+      })
     ).toBeVisible();
 
     const audio = page.locator('#greetingAudio');

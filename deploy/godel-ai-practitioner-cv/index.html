@@ -251,6 +251,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 14px;
+        margin-left: 24px;
       }
 
       .nav a {
@@ -1574,6 +1575,68 @@
       const greetingToggle = document.getElementById("greetingToggle");
       const greetingLabel = document.getElementById("greetingLabel");
       const greetingIcon = document.getElementById("greetingIcon");
+      const topbar = document.querySelector(".topbar");
+      const topbarMeta = document.querySelector(".topbar-meta");
+      const nav = document.querySelector(".nav");
+      const topbarMetaItems = topbarMeta ? Array.from(topbarMeta.querySelectorAll(".topbar-meta-item")) : [];
+      const navItems = nav ? Array.from(nav.querySelectorAll("a")) : [];
+      const emailMetaItem = topbarMetaItems.find((item) => item.matches('a[href^="mailto:"]'));
+      const topbarCollapseQueue = [...navItems.slice().reverse(), ...topbarMetaItems.filter((item) => item !== emailMetaItem).reverse()];
+      let topbarPriorityFrame = 0;
+
+      function setCollapsedState(node, collapsed) {
+        node.hidden = collapsed;
+        node.setAttribute("aria-hidden", String(collapsed));
+      }
+
+      function shouldCollapseTopbar() {
+        if (!emailMetaItem || window.matchMedia("(max-width: 1180px)").matches) {
+          return false;
+        }
+
+        const emailValue = emailMetaItem.querySelector(".topbar-meta-value");
+        const emailOverflowing = Boolean(emailValue && emailValue.scrollWidth > emailValue.clientWidth);
+        const visibleNavItems = navItems.filter((item) => !item.hidden);
+
+        if (visibleNavItems.length === 0) {
+          return emailOverflowing;
+        }
+
+        const emailRect = emailMetaItem.getBoundingClientRect();
+        const navRect = nav.getBoundingClientRect();
+        const sameRow = Math.abs(emailRect.top - navRect.top) < 24;
+        const navGap = navRect.left - emailRect.right;
+
+        return emailOverflowing || (sameRow && navGap < 28);
+      }
+
+      function syncTopbarPriority() {
+        topbarCollapseQueue.forEach((node) => setCollapsedState(node, false));
+
+        if (!topbar || !emailMetaItem || window.matchMedia("(max-width: 1180px)").matches) {
+          return;
+        }
+
+        topbarCollapseQueue.some((node) => {
+          if (!shouldCollapseTopbar()) {
+            return true;
+          }
+
+          setCollapsedState(node, true);
+          return false;
+        });
+      }
+
+      function scheduleTopbarPriority() {
+        if (topbarPriorityFrame) {
+          cancelAnimationFrame(topbarPriorityFrame);
+        }
+
+        topbarPriorityFrame = requestAnimationFrame(() => {
+          topbarPriorityFrame = 0;
+          syncTopbarPriority();
+        });
+      }
 
       function syncGreetingButton() {
         if (!greetingAudio || !greetingToggle || !greetingLabel || !greetingIcon) {
@@ -1606,8 +1669,10 @@
 
       revealNodes.forEach((node) => observer.observe(node));
       updateProgress();
+      scheduleTopbarPriority();
       window.addEventListener("scroll", updateProgress, { passive: true });
       window.addEventListener("resize", updateProgress);
+      window.addEventListener("resize", scheduleTopbarPriority);
 
       if (stackToggle && stackBundle) {
         stackToggle.addEventListener("click", () => {
@@ -1643,6 +1708,20 @@
             syncGreetingButton();
           });
         });
+      }
+
+      if (document.fonts?.ready) {
+        document.fonts.ready.then(() => {
+          scheduleTopbarPriority();
+        });
+      }
+
+      if (typeof ResizeObserver !== "undefined" && topbar) {
+        const topbarResizeObserver = new ResizeObserver(() => {
+          scheduleTopbarPriority();
+        });
+
+        topbarResizeObserver.observe(topbar);
       }
     </script>
   </body>

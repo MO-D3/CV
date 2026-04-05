@@ -30,4 +30,26 @@ test.describe('Vercel deploy target', () => {
       }));
     }).toMatchObject({ paused: false });
   });
+
+  test('keeps a safe gap between the email card and navigation on tight desktop widths', async ({ page }) => {
+    await page.setViewportSize({ width: 1240, height: 900 });
+    await page.goto('/deploy/godel-ai-practitioner-cv/');
+
+    await expect(page.getByRole('link', { name: 'Email micholesiak@gmail.com' })).toBeVisible();
+
+    const navGap = await page.evaluate(() => {
+      const emailCard = Array.from(document.querySelectorAll('.topbar-meta-item')).find((item) =>
+        item.textContent?.includes('micholesiak@gmail.com')
+      );
+      const nav = document.querySelector('.nav');
+
+      if (!emailCard || !nav) {
+        return -1;
+      }
+
+      return nav.getBoundingClientRect().left - emailCard.getBoundingClientRect().right;
+    });
+
+    expect(navGap).toBeGreaterThanOrEqual(48);
+  });
 });
